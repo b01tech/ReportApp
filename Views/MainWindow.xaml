@@ -5,11 +5,121 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReportApp.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Background="DimGray"
+        Title="Report" Height="1024" Width="1440" MinHeight="1024" MinWidth="1440"
+        Background="{StaticResource BackgroundBrush}"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="ToolWindow">
+        WindowStyle="ThreeDBorderWindow">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Right">
+            <Label Content="N° DO CERTIFICADO:"  VerticalAlignment="Bottom" FontSize="18"/>
+            <TextBox x:Name="txtReportId"  Grid.Column="1" VerticalAlignment="Bottom" Width="250" Height="36"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,100" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="CLIENTE:"/>
+                <TextBox x:Name="txtCustomer" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="ENDEREÇO:"/>
+                <TextBox x:Name="txtAddress" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="CIDADE:"/>
+                <TextBox x:Name="txtCity" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="UF:"/>
+                <TextBox x:Name="txtState" Width="250"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,72">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="FABRICANTE/MODELO:"/>
+                <TextBox x:Name="txtModel" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="N° DE SÉRIE:"/>
+                <TextBox x:Name="txtSerialNo" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="TAG:"/>
+                <TextBox x:Name="txtTagName" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="CLASSE:"/>
+                <TextBox x:Name="txtScaleClass" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="CAPACIDADE:"/>
+                <TextBox x:Name="txtCapacity" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="RESOLUÇÂO:"/>
+                <Label Content="d=:"/>
+                <TextBox x:Name="txtResolutionD"/>
+                <Label Content="e=:"/>
+                <TextBox x:Name="txtResolutionE"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="UNIDADE:"/>
+                <TextBox x:Name="txtUnit" Width="250"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,48,16,72">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="LOCAL:"/>
+                <TextBox x:Name="txtPlace" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="DATA EXECUÇÃO:"/>
+                <TextBox x:Name="txtDataEx" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="EXECUTOR:"/>
+                <TextBox x:Name="txtTechnician" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="DATA EMISSÃO:"/>
+                <TextBox x:Name="txtDataem" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="RESPONSÁVEL:"/>
+                <TextBox x:Name="txtManager" Width="250"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="SITUAÇÂO DO INSTRUMENTO:"/>
+                <TextBox x:Name="txtStatusReport"/>
+            </StackPanel>
+        </StackPanel>
+
+
     </Grid>
 </Window>
