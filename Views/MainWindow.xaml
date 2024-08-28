@@ -194,7 +194,7 @@
                 <TextBox x:Name="txtEccReadF"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="6" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,80">
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="6" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,60">
             <Label Content="Teste de Pesagem" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="CARGA" HorizontalAlignment="Center" Margin="36,0"/>
@@ -264,7 +264,7 @@
 
 
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,36,16,60">
+        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,60,16,60">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="Selecione os pesos:"/>
                 <Button x:Name="btnWeights" Content="PESOS" Margin="36,0"/>

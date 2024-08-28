@@ -20,10 +20,17 @@ namespace ReportApp.Models
         public string Technician { get; set; }
         public string Manager { get; set; }
         public ReportStatus Status { get; set; }
-        public double RepTest { get; set; }
-        public double MobTest { get; set; }
-        public double EccTest { get; set; }
-        public double WeightTest { get; set; }
+        public RepTest RepTest { get; set; }
+        public MobTest MobTest { get; set; }
+        public EccTest EccTest { get; set; }
+        public List<WeightTest> WeightTest { get; set; }
         public List<Weight> Weights { get; set; }
+
+        public Calibration()
+        {
+            
+        }
     }
+
+    
 }
