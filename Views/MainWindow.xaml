@@ -38,11 +38,19 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Right">
-            <Label Content="N° DO CERTIFICADO:"  VerticalAlignment="Bottom" FontSize="18"/>
-            <TextBox x:Name="txtReportId"  Grid.Column="1" VerticalAlignment="Bottom" Width="250" Height="36"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="8" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="N° DO CERTIFICADO:"  VerticalAlignment="Bottom" FontSize="24" FontWeight="Bold"/>
+                <TextBox x:Name="txtReportId"  Grid.Column="1" VerticalAlignment="Bottom" Width="250" Height="48" FontSize="18"/>                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="btnSearch" Content="BUSCAR" VerticalAlignment="Bottom" Margin="36,0"/>
+                <Button x:Name="btnSave" Content="SALVAR" VerticalAlignment="Bottom" Margin="36,0"/>
+                <Button x:Name="btnPrint" Content="IMPRIMIR" VerticalAlignment="Bottom" Margin="36,0"/>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,100" VerticalAlignment="Stretch">
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,80" VerticalAlignment="Stretch">
+            <Label Content="Dados do cliente" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="CLIENTE:"/>
                 <TextBox x:Name="txtCustomer" Width="250"/>
@@ -60,9 +68,10 @@
                 <TextBox x:Name="txtState" Width="250"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,72">
+        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,36,16,72">
+            <Label Content="Dados do Equipamento" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="FABRICANTE/MODELO:"/>
+                <Label Content="FABR./MODELO:"/>
                 <TextBox x:Name="txtModel" Width="250"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -93,7 +102,8 @@
                 <TextBox x:Name="txtUnit" Width="250"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,48,16,72">
+        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,48,16,60">
+            <Label Content="Dados da Calibração" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="LOCAL:"/>
                 <TextBox x:Name="txtPlace" Width="250"/>
@@ -119,7 +129,149 @@
                 <TextBox x:Name="txtStatusReport"/>
             </StackPanel>
         </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,36">
+            <Label Content="Repetibilidade" FontSize="10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="PESO APLICADO:"/>
+                <TextBox x:Name="txtRepMassApply"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="LEITURA 1:"/>
+                <TextBox x:Name="txtRepRead1"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="LEITURA 2:"/>
+                <TextBox x:Name="txtRepRead2"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,36">
+            <Label Content="Mobilidade" FontSize="10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="LEITURA SEM SOBRECARGA:"/>
+                <TextBox x:Name="txtMobReadBefore"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="SOBRECARGA APLICADA:"/>
+                <TextBox x:Name="txtMobOverLoad"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="APÓS A SOBRECARGA:"/>
+                <TextBox x:Name="txtMobReadAfter"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="6" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,72">
+            <Label Content="Excentricidade" FontSize="10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="TIPO DE ENSAIO:"/>
+                <TextBox x:Name="r"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="PESO APLICADO:"/>
+                <TextBox x:Name="e"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="A:"/>
+                <TextBox x:Name="txtEccReadA"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="B:"/>
+                <TextBox x:Name="txtEccReadB"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="C:"/>
+                <TextBox x:Name="txtEccReadC"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="D:"/>
+                <TextBox x:Name="txtEccReadD"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="E:"/>
+                <TextBox x:Name="txtEccReadE"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="F:"/>
+                <TextBox x:Name="txtEccReadF"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="6" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,80">
+            <Label Content="Teste de Pesagem" FontSize="10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="CARGA" HorizontalAlignment="Center" Margin="36,0"/>
+                <Label Content="LEITURA" HorizontalAlignment="Center" Margin="36,0"/>
+                <Label Content="ERRO" HorizontalAlignment="Center" Margin="36,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad1" Margin="12,0"/>
+                <TextBox x:Name="txtRead1" Margin="12,0"/>
+                <TextBox x:Name="txtError1" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad2" Margin="12,0"/>
+                <TextBox x:Name="txtRead2" Margin="12,0"/>
+                <TextBox x:Name="txtError2" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad3" Margin="12,0"/>
+                <TextBox x:Name="txtRead3" Margin="12,0"/>
+                <TextBox x:Name="txtError3" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad4" Margin="12,0"/>
+                <TextBox x:Name="txtRead4" Margin="12,0"/>
+                <TextBox x:Name="txtError4" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad5" Margin="12,0"/>
+                <TextBox x:Name="txtRead5" Margin="12,0"/>
+                <TextBox x:Name="txtError5" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad6" Margin="12,0"/>
+                <TextBox x:Name="txtRead6" Margin="12,0"/>
+                <TextBox x:Name="txtError6" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad7" Margin="12,0"/>
+                <TextBox x:Name="txtRead7" Margin="12,0"/>
+                <TextBox x:Name="txtError7" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad8" Margin="12,0"/>
+                <TextBox x:Name="txtRead8" Margin="12,0"/>
+                <TextBox x:Name="txtError8" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad9" Margin="12,0"/>
+                <TextBox x:Name="txtRead9" Margin="12,0"/>
+                <TextBox x:Name="txtError9" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad10" Margin="12,0"/>
+                <TextBox x:Name="txtRead10" Margin="12,0"/>
+                <TextBox x:Name="txtError10" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad11" Margin="12,0"/>
+                <TextBox x:Name="txtRead11" Margin="12,0"/>
+                <TextBox x:Name="txtError11" Margin="12,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBox x:Name="txtLoad12" Margin="12,0"/>
+                <TextBox x:Name="txtRead12" Margin="12,0"/>
+                <TextBox x:Name="txtError12" Margin="12,0"/>
+            </StackPanel>
 
 
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,36,16,60">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="Selecione os pesos:"/>
+                <Button x:Name="btnWeights" Content="PESOS" Margin="36,0"/>
+            </StackPanel>
+            <Grid x:Name="gdWeights">
+                
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>
