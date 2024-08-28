@@ -1,6 +1,6 @@
 ﻿namespace ReportApp.Models.Enums
 {
-    internal enum ScaleClass
+    public enum ScaleClass
     {
         ClassI,
         ClassII,

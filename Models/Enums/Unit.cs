@@ -1,6 +1,6 @@
 ﻿namespace ReportApp.Models.Enums
 {
-    internal enum Unit
+    public enum Unit
     {
         Mg,
         G,

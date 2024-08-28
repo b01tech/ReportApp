@@ -1,6 +1,6 @@
 ﻿namespace ReportApp.Models.Enums;
 
-internal enum ReportStatus
+public enum ReportStatus
 {
     Aprovado,
     Reprovado

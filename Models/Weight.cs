@@ -2,7 +2,7 @@
 
 namespace ReportApp.Models;
 
-internal class Weight
+public class Weight
 {
     [Key]
     public int WeightId { get; set; }

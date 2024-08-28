@@ -2,7 +2,7 @@
 
 namespace ReportApp.Models;
 
-internal class Customer
+public class Customer
 {
     [Key]
     public int CustomerId { get; set; }

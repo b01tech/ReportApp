@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ReportApp.Models
 {
-    internal class Calibration
+    public class Calibration
     {
         [Key]
         public int CalibrationId { get; set; }

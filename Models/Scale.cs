@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ReportApp.Models
 {
-    internal class Scale
+    public class Scale
     {
         [Key]
         public int ScaleId { get; set; }
