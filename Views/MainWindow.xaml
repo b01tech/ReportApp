@@ -41,7 +41,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="8" HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal">
                 <Label Content="N° DO CERTIFICADO:"  VerticalAlignment="Bottom" FontSize="24" FontWeight="Bold"/>
-                <TextBox x:Name="txtReportId"  Grid.Column="1" VerticalAlignment="Bottom" Width="250" Height="48" FontSize="18"/>                
+                <TextBox x:Name="txtReportId"  Grid.Column="1" VerticalAlignment="Bottom" Width="250" Height="36" FontSize="18"/>                
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="btnSearch" Content="BUSCAR" VerticalAlignment="Bottom" Margin="36,0"/>
@@ -53,7 +53,7 @@
             <Label Content="Dados do cliente" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="CLIENTE:"/>
-                <TextBox x:Name="txtCustomer" Width="250"/>
+                <TextBox x:Name="txtCustomerName" Width="250"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="ENDEREÇO:"/>
