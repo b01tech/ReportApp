@@ -1,4 +1,7 @@
-﻿namespace ReportApp.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace ReportApp.Models
 {
     public class RepTest
     {
@@ -28,7 +31,15 @@
 
     public class WeightTest
     {
+        [Key]
+        public int Id { get; set; }  // Chave primária que não é gerada automaticamente
+
+        public int CalibrationId { get; set; } // Chave estrangeira para associar a Calibration
         public double WLoad { get; set; }
         public double WRead { get; set; }
+
+        // Propriedade de navegação
+        [ForeignKey("CalibrationId")]
+        public Calibration Calibration { get; set; }
     }
 }
