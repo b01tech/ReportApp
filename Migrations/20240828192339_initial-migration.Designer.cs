@@ -11,7 +11,7 @@ using ReportApp.Data;
 namespace ReportApp.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240828184634_initial-migration")]
+    [Migration("20240828192339_initial-migration")]
     partial class initialmigration
     {
         /// <inheritdoc />

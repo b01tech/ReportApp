@@ -1,11 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ReportApp.Models;
+using System.IO;
+using System.Windows;
 
 namespace ReportApp.Data;
 
-internal class AppDbContext : DbContext
+public class AppDbContext : DbContext
 {
-    private string _databasePath = "DataSource = Data\\AppDatabase.db";
+    //public string _databasePath = @"Data Source = Data\AppDatabase.db";
+    private string _databasePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\Data\\AppDatabase.db"));
+    
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Scale> Scales { get; set; }
     public DbSet<Weight> Weights { get; set; }
@@ -23,6 +27,7 @@ internal class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlite(_databasePath);
+
+        optionsBuilder.UseSqlite($"Data Source={_databasePath}");
     }
 }
