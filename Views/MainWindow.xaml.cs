@@ -82,14 +82,14 @@ public partial class MainWindow : Window
 
     public void AddWeight(List<string> weights)
     {
-        spWeights.Children.Clear();
+        spWeightsList.Children.Clear();
         foreach (var weight in weights)
         {
             var label = new Label
             {
                 Content = weight
             };
-            spWeights.Children.Add(label);
+            spWeightsList.Children.Add(label);
         }
     }
 
@@ -220,6 +220,32 @@ public partial class MainWindow : Window
 
             }
 
+        }
+    }
+
+    private void btnNew_Click(object sender, RoutedEventArgs e)
+    {
+        ClearAllTextBoxes(spWeightTest);
+        ClearAllTextBoxes(spMobTest);
+        ClearAllTextBoxes(spRepTest);
+        ClearAllTextBoxes(spEccTest);
+        ClearAllTextBoxes(spScaleInfo);
+    }
+    private void ClearAllTextBoxes(Panel panel)
+    {
+        foreach (var child in panel.Children)
+        {
+            if (child is TextBox textBox)
+            {
+                textBox.Text = string.Empty;
+            }else if (child is ComboBox combobox)
+            {
+                combobox.SelectedIndex = -1;
+            }
+            else if (child is Panel childPanel)
+            {                
+                ClearAllTextBoxes(childPanel);
+            }
         }
     }
 }

@@ -47,7 +47,7 @@
                 <Button x:Name="btnSearch" Content="BUSCAR" VerticalAlignment="Bottom" Margin="24,0"/>
                 <Button x:Name="btnSave" Content="SALVAR" VerticalAlignment="Bottom" Margin="24,0"/>
                 <Button x:Name="btnPrint" Content="IMPRIMIR" VerticalAlignment="Bottom" Margin="24,0"/>
-                <Button x:Name="btnNew" Content="NOVO" VerticalAlignment="Bottom" Margin="24,0"/>
+                <Button x:Name="btnNew" Content="NOVO" VerticalAlignment="Bottom" Margin="24,0" Click="btnNew_Click"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,80" VerticalAlignment="Stretch">
@@ -69,7 +69,7 @@
                 <ComboBox x:Name="cbState" Margin="0,0,150,0"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,36,16,72">
+        <StackPanel x:Name="spScaleInfo" Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,36,16,72">
             <Label Content="Dados do Equipamento" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="FABR./MODELO:"/>
@@ -131,7 +131,7 @@
                 <ComboBox x:Name="cbStatusReport"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,36">
+        <StackPanel x:Name="spRepTest" Orientation="Vertical" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,36">
             <Label Content="Repetibilidade" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="PESO APLICADO:"/>
@@ -146,7 +146,7 @@
                 <TextBox x:Name="txtRepRead2" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,36">
+        <StackPanel x:Name="spMobTest" Orientation="Vertical" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,36">
             <Label Content="Mobilidade" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="LEITURA SEM SOBRECARGA:"/>
@@ -161,7 +161,7 @@
                 <TextBox x:Name="txtMobReadAfter" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="6" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,72">
+        <StackPanel x:Name="spEccTest" Orientation="Vertical" Grid.Row="6" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="6" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,72">
             <Label Content="Excentricidade" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="TIPO DE ENSAIO:"/>
@@ -196,7 +196,7 @@
                 <TextBox x:Name="txtEccReadF" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="6" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,60">
+        <StackPanel x:Name="spWeightTest" Orientation="Vertical" Grid.Row="2" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="6" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,60">
             <Label Content="Teste de Pesagem" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="CARGA" HorizontalAlignment="Center" Margin="36,0"/>
@@ -270,7 +270,7 @@
                 <Button x:Name="btnWeights" Content="PESOS" Margin="36,0" Click="btnWeights_Click"/>
             </StackPanel>
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" Margin="16" MaxHeight="200">
-                <StackPanel Orientation="Vertical" x:Name="spWeights"/>
+                <StackPanel Orientation="Vertical" x:Name="spWeightsList"/>
             </ScrollViewer>
         </StackPanel>
     </Grid>
