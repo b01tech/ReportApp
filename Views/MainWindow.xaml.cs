@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System.Globalization;
+using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ReportApp.Views;
 
@@ -14,7 +17,7 @@ public partial class MainWindow : Window
         "Roni Cleber"
     };
     private List<string> _status = new List<string> { "Aprovado", "Reprovado" };
-    private List<string> _scaleClass = new List<string> 
+    private List<string> _scaleClass = new List<string>
     { "Não se aplica","Classe I", "Classe II", "Classe III", "Classe IV" };
     private List<string> _unit = new List<string> { "mg", "g", "kg" };
     private SortedSet<string> _states = new SortedSet<string>
@@ -48,6 +51,7 @@ public partial class MainWindow : Window
     "TO"  // Tocantins
 };
     private SortedSet<string> _ecctypes = new SortedSet<string> { "Não se aplica", "Industrial", "Rodoviária" };
+    private static readonly Regex _regex = new Regex("[^0-9,.]+");
 
 
     public MainWindow()
@@ -182,10 +186,39 @@ public partial class MainWindow : Window
             txtEccLoad.IsEnabled = true;
             txtEccReadA.IsEnabled = true;
             txtEccReadB.IsEnabled = true;
-            txtEccReadC.IsEnabled = true;                
+            txtEccReadC.IsEnabled = true;
             txtEccReadD.IsEnabled = true;
             txtEccReadE.IsEnabled = true;
             txtEccReadF.IsEnabled = true;
+
+        }
+    }
+
+    private void OnlyNumbers(object sender, TextCompositionEventArgs e)
+    {
+        e.Handled = _regex.IsMatch(e.Text);
+    }
+    private bool IsValidNumber(string text)
+    {
+        if (string.IsNullOrEmpty(text))
+            return false;
+
+        string normalizedText = text.Replace(',', '.');
+
+        return double.TryParse(normalizedText, NumberStyles.Any, CultureInfo.InvariantCulture, out _);
+    }
+
+    private void resetNotValidNumberInput(object sender, RoutedEventArgs e)
+    {
+        var textbox = sender as TextBox;
+        if (textbox is not null)
+        {
+
+            if (!IsValidNumber(textbox.Text.Trim()))
+            {
+                textbox.Text = string.Empty;
+
+            }
 
         }
     }
