@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReportApp.Views"
         mc:Ignorable="d"
-        Title="Selecione os pesos utilizados" Height="300" Width="400" ResizeMode="NoResize"
+        Title="Selecione os pesos utilizados" Height="600" Width="400" ResizeMode="NoResize"
         Background="{StaticResource BackgroundBrush}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="ToolWindow">
@@ -28,11 +28,8 @@
         </Grid.ColumnDefinitions>
         <Label Content="Lista pesos padrão:" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontSize="16" Margin="16,0"/>
         <Button x:Name="btnAddWeights" Content="ADICIONAR" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Click="btnAddWeights_Click" HorizontalAlignment="Right" Margin="16,0"/>
-        <Grid x:Name="gdWeight" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="3" Margin="16">
-            <StackPanel Orientation="Vertical" x:Name="spWeightsList">
-
-            </StackPanel>
-        </Grid>
-
+        <ScrollViewer Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="3" Margin="16" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+            <StackPanel Orientation="Vertical" x:Name="spWeightsList"/>
+        </ScrollViewer>
     </Grid>
 </Window>
