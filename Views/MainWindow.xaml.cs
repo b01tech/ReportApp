@@ -1,27 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ReportApp.Models;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace ReportApp.Views
+namespace ReportApp.Views;
+
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
+        InitializeComponent();
+    }
+
+    private void btnWeights_Click(object sender, RoutedEventArgs e)
+    {
+        var weightWindow = new SelectWeightWindow(this);
+        weightWindow.ShowDialog();
+    }
+
+    public void AddWeight(List<string> weights)
+    {
+        spWeights.Children.Clear();
+        foreach (var weight in weights)
         {
-            InitializeComponent();
+            var label = new Label
+            {
+                Content = weight
+            };
+            spWeights.Children.Add(label);
         }
+
     }
 }

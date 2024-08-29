@@ -267,11 +267,9 @@
         <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,60,16,60">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="Selecione os pesos:"/>
-                <Button x:Name="btnWeights" Content="PESOS" Margin="36,0"/>
+                <Button x:Name="btnWeights" Content="PESOS" Margin="36,0" Click="btnWeights_Click"/>
             </StackPanel>
-            <Grid x:Name="gdWeights">
-                
-            </Grid>
+            <StackPanel Orientation="Vertical" x:Name="spWeights"/>
         </StackPanel>
     </Grid>
 </Window>

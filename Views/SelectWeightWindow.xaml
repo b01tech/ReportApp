@@ -1,0 +1,38 @@
+﻿<Window x:Class="ReportApp.Views.SelectWeightWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReportApp.Views"
+        mc:Ignorable="d"
+        Title="Selecione os pesos utilizados" Height="300" Width="400" ResizeMode="NoResize"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Lista pesos padrão:" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" FontSize="16" Margin="16,0"/>
+        <Button x:Name="btnAddWeights" Content="ADICIONAR" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Click="btnAddWeights_Click" HorizontalAlignment="Right" Margin="16,0"/>
+        <Grid x:Name="gdWeight" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="3" Margin="16">
+            <StackPanel Orientation="Vertical" x:Name="spWeightsList">
+
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>

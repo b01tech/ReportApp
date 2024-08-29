@@ -7,9 +7,8 @@ namespace ReportApp.Data;
 
 public class AppDbContext : DbContext
 {
-    //public string _databasePath = @"Data Source = Data\AppDatabase.db";
     private string _databasePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\Data\\AppDatabase.db"));
-    
+
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Scale> Scales { get; set; }
     public DbSet<Weight> Weights { get; set; }
