@@ -41,12 +41,13 @@
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="8" HorizontalAlignment="Right">
             <StackPanel Orientation="Horizontal">
                 <Label Content="N° DO CERTIFICADO:"  VerticalAlignment="Bottom" FontSize="24" FontWeight="Bold"/>
-                <TextBox x:Name="txtReportId"  Grid.Column="1" VerticalAlignment="Bottom" Width="250" Height="36" FontSize="18"/>                
+                <TextBox x:Name="txtReportId"  Grid.Column="1" VerticalAlignment="Bottom" Width="250" Height="36" FontSize="18" FontWeight="Bold"/>                
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="btnSearch" Content="BUSCAR" VerticalAlignment="Bottom" Margin="36,0"/>
-                <Button x:Name="btnSave" Content="SALVAR" VerticalAlignment="Bottom" Margin="36,0"/>
-                <Button x:Name="btnPrint" Content="IMPRIMIR" VerticalAlignment="Bottom" Margin="36,0"/>
+                <Button x:Name="btnSearch" Content="BUSCAR" VerticalAlignment="Bottom" Margin="24,0"/>
+                <Button x:Name="btnSave" Content="SALVAR" VerticalAlignment="Bottom" Margin="24,0"/>
+                <Button x:Name="btnPrint" Content="IMPRIMIR" VerticalAlignment="Bottom" Margin="24,0"/>
+                <Button x:Name="btnNew" Content="NOVO" VerticalAlignment="Bottom" Margin="24,0"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{StaticResource SecondaryBrush}" Margin="16,16,16,80" VerticalAlignment="Stretch">
@@ -65,7 +66,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="UF:"/>
-                <TextBox x:Name="txtState" Width="250"/>
+                <ComboBox x:Name="cbState" Margin="0,0,150,0"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,36,16,72">
@@ -84,11 +85,12 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="CLASSE:"/>
-                <TextBox x:Name="txtScaleClass" Width="250"/>
+                <ComboBox x:Name="cbScaleClass" Width="250"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="CAPACIDADE:"/>
-                <TextBox x:Name="txtCapacity" Width="250"/>
+                <TextBox x:Name="txtCapacity" />
+                <ComboBox x:Name="cbUnit" Margin="48,0,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="RESOLUÇÂO:"/>
@@ -114,7 +116,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="EXECUTOR:"/>
-                <TextBox x:Name="txtTechnician" Width="250"/>
+                <ComboBox x:Name="cbTechnician" Width="250"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="DATA EMISSÃO:"/>
@@ -122,11 +124,11 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="RESPONSÁVEL:"/>
-                <TextBox x:Name="txtManager" Width="250"/>
+                <ComboBox x:Name="cbManager" Width="250"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="SITUAÇÂO DO INSTRUMENTO:"/>
-                <TextBox x:Name="txtStatusReport"/>
+                <ComboBox x:Name="cbStatusReport"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,36">
@@ -163,11 +165,11 @@
             <Label Content="Excentricidade" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="TIPO DE ENSAIO:"/>
-                <TextBox x:Name="r"/>
+                <ComboBox x:Name="cbEccTestType" Width="150" SelectionChanged="cbEccTestType_SelectionChanged"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="PESO APLICADO:"/>
-                <TextBox x:Name="e"/>
+                <TextBox x:Name="txtEccLoad"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="A:"/>
@@ -204,62 +206,62 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad1" Margin="12,0"/>
                 <TextBox x:Name="txtRead1" Margin="12,0"/>
-                <TextBox x:Name="txtError1" Margin="12,0"/>
+                <TextBox x:Name="txtError1" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad2" Margin="12,0"/>
                 <TextBox x:Name="txtRead2" Margin="12,0"/>
-                <TextBox x:Name="txtError2" Margin="12,0"/>
+                <TextBox x:Name="txtError2" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad3" Margin="12,0"/>
                 <TextBox x:Name="txtRead3" Margin="12,0"/>
-                <TextBox x:Name="txtError3" Margin="12,0"/>
+                <TextBox x:Name="txtError3" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad4" Margin="12,0"/>
                 <TextBox x:Name="txtRead4" Margin="12,0"/>
-                <TextBox x:Name="txtError4" Margin="12,0"/>
+                <TextBox x:Name="txtError4" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad5" Margin="12,0"/>
                 <TextBox x:Name="txtRead5" Margin="12,0"/>
-                <TextBox x:Name="txtError5" Margin="12,0"/>
+                <TextBox x:Name="txtError5" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad6" Margin="12,0"/>
                 <TextBox x:Name="txtRead6" Margin="12,0"/>
-                <TextBox x:Name="txtError6" Margin="12,0"/>
+                <TextBox x:Name="txtError6" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad7" Margin="12,0"/>
                 <TextBox x:Name="txtRead7" Margin="12,0"/>
-                <TextBox x:Name="txtError7" Margin="12,0"/>
+                <TextBox x:Name="txtError7" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad8" Margin="12,0"/>
                 <TextBox x:Name="txtRead8" Margin="12,0"/>
-                <TextBox x:Name="txtError8" Margin="12,0"/>
+                <TextBox x:Name="txtError8" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad9" Margin="12,0"/>
                 <TextBox x:Name="txtRead9" Margin="12,0"/>
-                <TextBox x:Name="txtError9" Margin="12,0"/>
+                <TextBox x:Name="txtError9" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad10" Margin="12,0"/>
                 <TextBox x:Name="txtRead10" Margin="12,0"/>
-                <TextBox x:Name="txtError10" Margin="12,0"/>
+                <TextBox x:Name="txtError10" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad11" Margin="12,0"/>
                 <TextBox x:Name="txtRead11" Margin="12,0"/>
-                <TextBox x:Name="txtError11" Margin="12,0"/>
+                <TextBox x:Name="txtError11" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad12" Margin="12,0"/>
                 <TextBox x:Name="txtRead12" Margin="12,0"/>
-                <TextBox x:Name="txtError12" Margin="12,0"/>
+                <TextBox x:Name="txtError12" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Vertical" Background="{StaticResource SecondaryBrush}" Margin="16,60,16,60" Grid.Row="7" Grid.Column="7" Grid.ColumnSpan="3" Grid.RowSpan="5">
