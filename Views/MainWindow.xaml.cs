@@ -248,4 +248,11 @@ public partial class MainWindow : Window
             }
         }
     }
+
+    private void btnSearchCustomer_Click(object sender, RoutedEventArgs e)
+    {
+        var selectCustomer = new SelectCustomerWindow(this);
+        selectCustomer.ShowDialog();
+
+    }
 }

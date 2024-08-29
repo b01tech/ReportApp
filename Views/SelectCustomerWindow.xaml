@@ -1,0 +1,30 @@
+﻿<Window x:Class="ReportApp.Views.SelectCustomerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ReportApp.Views"
+        mc:Ignorable="d"
+        Title="Selecione o cliente" Height="400" Width="500" ResizeMode="NoResize"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Lista de Clientes:" Grid.Row="1" Grid.Column="1" Margin="16,0"/>
+        <Button x:Name="btnSelectCustomer" Content="SELECIONAR" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="16,0" Click="btnSelectCustomer_Click"/>
+        <ListBox x:Name="lbxCustomersList"  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="16"/>
+    </Grid>
+</Window>

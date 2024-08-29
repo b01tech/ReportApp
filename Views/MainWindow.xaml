@@ -44,8 +44,8 @@
                 <TextBox x:Name="txtReportId"  Grid.Column="1" VerticalAlignment="Bottom" Width="250" Height="36" FontSize="18" FontWeight="Bold"/>                
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="btnSearch" Content="BUSCAR" VerticalAlignment="Bottom" Margin="24,0"/>
-                <Button x:Name="btnSave" Content="SALVAR" VerticalAlignment="Bottom" Margin="24,0"/>
+                <Button x:Name="btnSearchId" Content="BUSCAR ID" VerticalAlignment="Bottom" Margin="24,0"/>
+                <Button x:Name="btnSearchCustomer" Content="BUSCAR CLIENTE" VerticalAlignment="Bottom" Margin="24,0" Click="btnSearchCustomer_Click"/>
                 <Button x:Name="btnPrint" Content="IMPRIMIR" VerticalAlignment="Bottom" Margin="24,0"/>
                 <Button x:Name="btnNew" Content="NOVO" VerticalAlignment="Bottom" Margin="24,0" Click="btnNew_Click"/>
             </StackPanel>
