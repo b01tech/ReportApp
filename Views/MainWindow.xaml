@@ -205,62 +205,62 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad1" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead1" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead1" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError" />
                 <TextBox x:Name="txtError1" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad2" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead2" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead2" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError2" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad3" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead3" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead3" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError3" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad4" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead4" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead4" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError4" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad5" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead5" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead5" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError5" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad6" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead6" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead6" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError6" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad7" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead7" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead7" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError7" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad8" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead8" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead8" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError8" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad9" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead9" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead9" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError9" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad10" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead10" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead10" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError10" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad11" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead11" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead11" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError11" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <TextBox x:Name="txtLoad12" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
-                <TextBox x:Name="txtRead12" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+                <TextBox x:Name="txtRead12" Margin="12,0" PreviewTextInput="OnlyNumbers" LostFocus="calcError"/>
                 <TextBox x:Name="txtError12" Margin="12,0" IsEnabled="False"/>
             </StackPanel>
         </StackPanel>

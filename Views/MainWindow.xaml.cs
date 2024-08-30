@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -254,5 +255,35 @@ public partial class MainWindow : Window
         var selectCustomer = new SelectCustomerWindow(this);
         selectCustomer.ShowDialog();
 
+    }
+
+    private void calcError(object sender, RoutedEventArgs e)
+    {
+        resetNotValidNumberInput(sender, e);
+
+        var weightRead = sender as TextBox;
+        
+        if(!string.IsNullOrEmpty(weightRead?.Text))
+        {
+            string weightLoadName = weightRead.Name.Replace("Read", "Load");
+            var weightLoad = (TextBox)FindName(weightLoadName);
+            string weightErrorName = weightRead.Name.Replace("Read", "Error");
+            var weightError = (TextBox)FindName(weightErrorName);
+
+            if (!string.IsNullOrEmpty(weightLoad.Text))
+            {
+                if (double.TryParse(weightLoad.Text, out double loadValue) && double.TryParse(weightRead.Text, out double readValue))
+                {
+                    double error = loadValue - readValue;
+                    weightError.Text = error.ToString("F4");
+                }
+                else
+                {
+                    weightError.Text = string.Empty;
+                }
+
+            }
+
+        }
     }
 }
