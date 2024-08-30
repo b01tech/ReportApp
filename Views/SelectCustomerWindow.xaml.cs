@@ -22,7 +22,9 @@ public partial class SelectCustomerWindow : Window
     {
         using (var context = new AppDbContext())
         {
-            return context.Customers.ToList();
+            return context.Customers
+                .OrderBy(_ => _.Name)
+                .ToList();
         }
     }
 
@@ -33,6 +35,7 @@ public partial class SelectCustomerWindow : Window
             var item = new ListBoxItem
             {
                 Content = customer.Name,
+                Tag = customer
             };
             lbxCustomersList.Items.Add(item);
         }
@@ -40,12 +43,19 @@ public partial class SelectCustomerWindow : Window
 
     private void btnSelectCustomer_Click(object sender, RoutedEventArgs e)
     {
-       
-        using (var context = new AppDbContext())
+        var selectListboxItem = lbxCustomersList.SelectedItem as ListBoxItem;
+        if (selectListboxItem != null)
         {
-            
-        }
-            
+            var selectCustomer = selectListboxItem.Tag as Customer;
+
+            using (var context = new AppDbContext())
+            {
+                _mainWindow.txtCustomerName.Text = selectCustomer.Name;
+                _mainWindow.txtAddress.Text = selectCustomer.Address;
+                _mainWindow.txtCity.Text = selectCustomer.City;
+                _mainWindow.cbState.Text = selectCustomer.State;
+            }
+        } 
 
         this.Close();
     }
