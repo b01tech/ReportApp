@@ -112,7 +112,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="DATA EXECUÇÃO:"/>
-                <TextBox x:Name="txtDataEx" Width="250"/>
+                <DatePicker x:Name="dateCal" Text="gfdsgf"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="EXECUTOR:"/>
@@ -120,7 +120,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="DATA EMISSÃO:"/>
-                <TextBox x:Name="txtDataem" Width="250"/>
+                <DatePicker x:Name="dateReport"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="RESPONSÁVEL:"/>
