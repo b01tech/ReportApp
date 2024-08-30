@@ -46,7 +46,7 @@
             <StackPanel Orientation="Horizontal">
                 <Button x:Name="btnSearchId" Content="BUSCAR ID" VerticalAlignment="Bottom" Margin="24,0"/>
                 <Button x:Name="btnSearchCustomer" Content="BUSCAR CLIENTE" VerticalAlignment="Bottom" Margin="24,0" Click="btnSearchCustomer_Click"/>
-                <Button x:Name="btnPrint" Content="IMPRIMIR" VerticalAlignment="Bottom" Margin="24,0"/>
+                <Button x:Name="btnPrint" Content="IMPRIMIR" VerticalAlignment="Bottom" Margin="24,0" Click="btnPrint_Click"/>
                 <Button x:Name="btnNew" Content="NOVO" VerticalAlignment="Bottom" Margin="24,0" Click="btnNew_Click"/>
             </StackPanel>
         </StackPanel>

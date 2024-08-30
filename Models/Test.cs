@@ -32,13 +32,13 @@ namespace ReportApp.Models
     public class WeightTest
     {
         [Key]
-        public int Id { get; set; }  // Chave primária que não é gerada automaticamente
+        public int Id { get; set; } 
 
-        public int CalibrationId { get; set; } // Chave estrangeira para associar a Calibration
+        public int CalibrationId { get; set; }
         public double WLoad { get; set; }
         public double WRead { get; set; }
 
-        // Propriedade de navegação
+        
         [ForeignKey("CalibrationId")]
         public Calibration Calibration { get; set; }
     }

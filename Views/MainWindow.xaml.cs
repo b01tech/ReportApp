@@ -1,4 +1,7 @@
-﻿using System.Globalization;
+﻿using ReportApp.Data;
+using ReportApp.Models;
+using ReportApp.Models.Enums;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
@@ -116,7 +119,6 @@ public partial class MainWindow : Window
             cbManager.Items.Add(cbItem);
         }
     }
-
 
     public void LoadStatusReport()
     {
@@ -239,12 +241,13 @@ public partial class MainWindow : Window
             if (child is TextBox textBox)
             {
                 textBox.Text = string.Empty;
-            }else if (child is ComboBox combobox)
+            }
+            else if (child is ComboBox combobox)
             {
                 combobox.SelectedIndex = -1;
             }
             else if (child is Panel childPanel)
-            {                
+            {
                 ClearAllTextBoxes(childPanel);
             }
         }
@@ -262,8 +265,8 @@ public partial class MainWindow : Window
         resetNotValidNumberInput(sender, e);
 
         var weightRead = sender as TextBox;
-        
-        if(!string.IsNullOrEmpty(weightRead?.Text))
+
+        if (!string.IsNullOrEmpty(weightRead?.Text))
         {
             string weightLoadName = weightRead.Name.Replace("Read", "Load");
             var weightLoad = (TextBox)FindName(weightLoadName);
@@ -286,4 +289,96 @@ public partial class MainWindow : Window
 
         }
     }
+
+    private void btnPrint_Click(object sender, RoutedEventArgs e)
+    {
+        var mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+        if (mainWindow != null)
+        {
+            saveNewReport(mainWindow);
+        }
+    }
+
+    private void saveNewReport(MainWindow mainWindow)
+    {
+        using (var context = new AppDbContext())
+        {
+            var customer = new Customer
+            {
+                Name = mainWindow.txtCustomerName.Text,
+                Address = mainWindow.txtAddress.Text,
+                City = mainWindow.txtCity.Text,
+                State = mainWindow.cbState.Text
+            };
+
+            var scale = new Scale
+            {
+                TagName = mainWindow.txtTagName.Text,
+                SerialNo = mainWindow.txtSerialNo.Text,
+                ResolutionD = double.Parse(mainWindow.txtResolutionD.Text),
+                ResolutionE = double.Parse(mainWindow.txtResolutionE.Text),
+                Capacity = double.Parse(mainWindow.txtCapacity.Text),
+                Model = mainWindow.txtModel.Text,
+                Unit = Unit.Kg
+            };
+
+            var repTest = new RepTest
+            {
+                RepMass = double.Parse(mainWindow.txtRepMassApply.Text),
+                RepRead1 = double.Parse(mainWindow.txtRepRead1.Text),
+                RepRead2 = double.Parse(mainWindow.txtRepRead2.Text)
+            };
+
+            var mobTest = new MobTest
+            {
+                MobBefore = double.Parse(mainWindow.txtMobReadBefore.Text),
+                MobLoad = double.Parse(mainWindow.txtMobOverLoad.Text),
+                MobAfter = double.Parse(mainWindow.txtMobReadAfter.Text),
+            };
+
+            var eccTest = new EccTest
+            {
+                Type = mainWindow.cbEccTestType.Text,
+                EccLoad = TryParseDouble(mainWindow.txtEccLoad?.Text),
+                A = TryParseDouble(mainWindow.txtEccReadA?.Text),
+                B = TryParseDouble(mainWindow.txtEccReadB?.Text),
+                C = TryParseDouble(mainWindow.txtEccReadC?.Text),
+                D = TryParseDouble(mainWindow.txtEccReadD?.Text),
+                E = TryParseDouble(mainWindow.txtEccReadE?.Text),
+                F = TryParseDouble(mainWindow.txtEccReadF?.Text),
+            };
+
+            var weightTestList = new List<WeightTest>();
+            var weights = new List<Weight>();
+
+            var cal = new Calibration
+            {
+                ReportId = mainWindow.txtReportId.Text,
+                Place = mainWindow.txtPlace.Text,
+                Technician = mainWindow.cbTechnician.Text,
+                Manager = mainWindow.cbManager.Text,
+                Customer = customer,
+                RepTest = repTest,
+                MobTest = mobTest,
+                EccTest = eccTest,
+                DateCal = DateTime.Now,
+                DateReport = DateTime.Now,
+                Weights = weights,
+                WeightTest = weightTestList,
+                Status = ReportStatus.Aprovado,
+                Scale = scale
+
+            };
+            context.Calibrations.Add(cal);
+            context.SaveChanges();
+        }
+    }
+
+    private double? TryParseDouble(string text)
+    {
+        return double.TryParse(text, out double value) ? value : (double?)null;
+    }
+
+
+
 }
