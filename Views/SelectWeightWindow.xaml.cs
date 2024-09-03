@@ -50,6 +50,7 @@ public partial class SelectWeightWindow : Window
             .OfType<CheckBox>()
             .Where(cb => cb.IsChecked == true)
             .Select(c => c.Content.ToString()).ToList();
+    
 
         _mainWindow.AddWeight(selectedWeights);
         this.Close();

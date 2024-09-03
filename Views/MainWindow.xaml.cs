@@ -1,4 +1,5 @@
-﻿using ReportApp.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ReportApp.Data;
 using ReportApp.Models;
 using ReportApp.Models.Enums;
 using System.Globalization;
@@ -166,7 +167,7 @@ public partial class MainWindow : Window
 
     private void cbEccTestType_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (cbEccTestType.SelectedValue.ToString() == "Não se aplica")
+        if (cbEccTestType.SelectedValue?.ToString() == "Não se aplica")
         {
             txtEccLoad.IsEnabled = false;
             txtEccLoad.Text = string.Empty;
@@ -227,13 +228,13 @@ public partial class MainWindow : Window
 
     private void btnNew_Click(object sender, RoutedEventArgs e)
     {
-        ClearAllTextBoxes(spWeightTest);
-        ClearAllTextBoxes(spMobTest);
-        ClearAllTextBoxes(spRepTest);
-        ClearAllTextBoxes(spEccTest);
-        ClearAllTextBoxes(spScaleInfo);
+        ClearAllInputs(spWeightTest);
+        ClearAllInputs(spMobTest);
+        ClearAllInputs(spRepTest);
+        ClearAllInputs(spEccTest);
+        ClearAllInputs(spScaleInfo);
     }
-    private void ClearAllTextBoxes(Panel panel)
+    private void ClearAllInputs(Panel panel)
     {
         foreach (var child in panel.Children)
         {
@@ -241,13 +242,13 @@ public partial class MainWindow : Window
             {
                 textBox.Text = string.Empty;
             }
-            else if (child is ComboBox combobox)
+            else if (child is ComboBox comboBox)
             {
-                combobox.SelectedIndex = -1;
+                comboBox.SelectedIndex = -1;
             }
             else if (child is Panel childPanel)
             {
-                ClearAllTextBoxes(childPanel);
+                ClearAllInputs(childPanel);
             }
         }
     }
@@ -294,11 +295,11 @@ public partial class MainWindow : Window
         var mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
         if (mainWindow != null)
         {
-            saveNewReport(mainWindow);
+            SaveNewReport(mainWindow);
         }
     }
 
-    private void saveNewReport(MainWindow mainWindow)
+    private void SaveNewReport(MainWindow mainWindow)
     {
         using (var context = new AppDbContext())
         {
@@ -328,7 +329,8 @@ public partial class MainWindow : Window
                     ResolutionE = double.Parse(mainWindow.txtResolutionE.Text),
                     Capacity = double.Parse(mainWindow.txtCapacity.Text),
                     Model = mainWindow.txtModel.Text,
-                    Unit = Unit.Kg
+                    Unit = Enum.TryParse<Unit>(mainWindow.cbUnit.Text, out var u) ? u : Unit.Kg, 
+                    ScaleClass = Enum.TryParse<ScaleClass>(mainWindow.cbScaleClass.Text, out var cl) ? cl : ScaleClass.ClassIII,
                 };
 
                 var repTest = new RepTest
@@ -357,7 +359,7 @@ public partial class MainWindow : Window
                     F = TryParseDouble(mainWindow.txtEccReadF?.Text),
                 };
 
-                var weightTestList = new List<WeightTest>();
+                var weightTestList = new List<WeightTest>();                
                 var weights = new List<Weight>();
 
                 var cal = new Calibration
@@ -374,14 +376,17 @@ public partial class MainWindow : Window
                     DateReport = DateTime.Now,
                     Weights = weights,
                     WeightTest = weightTestList,
-                    Status = ReportStatus.Aprovado,
+                    Status = Enum.TryParse<ReportStatus>(mainWindow.cbStatusReport.Text, out var status) ? status: ReportStatus.Aprovado,
                     Scale = scale
+
 
                 };
                 context.Calibrations.Add(cal);
                 context.SaveChanges();
+                MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.");
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 MessageBox.Show($"Erro ao salvar o relatório: Campos inválidos", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 
@@ -394,6 +399,79 @@ public partial class MainWindow : Window
         return double.TryParse(text, out double value) ? value : (double?)null;
     }
 
+    private void btnSearchId_Click(object sender, RoutedEventArgs e)
+    {
+        var mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
+        if (mainWindow != null)
+        {
+            LoadReport(mainWindow);
+        }
+    }
+
+    private void LoadReport(MainWindow mainwindow)
+    {
+        if (string.IsNullOrEmpty(mainwindow.txtReportId.Text))
+        {
+            return;
+        }
+        else
+        {
+            using (var context = new AppDbContext())
+            {
+                var report = context.Calibrations
+                    .Include(c => c.Customer)
+                    .Include(c => c.Scale)
+                    .Include(c => c.Weights)
+                    .Include(c => c.WeightTest)
+                    .FirstOrDefault(c => c.ReportId == mainwindow.txtReportId.Text);
+
+                if (report is null)
+                {
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show($"Informações do certificado {mainwindow.txtReportId.Text} carregadas");
+                    mainwindow.txtCustomerName.Text = report.Customer.Name;
+                    mainwindow.txtAddress.Text = report.Customer.Address;
+                    mainwindow.txtCity.Text = report.Customer.City;
+                    mainwindow.cbState.Text = report.Customer.State;
+
+                    mainwindow.txtModel.Text = report.Scale.Model;
+                    mainwindow.txtSerialNo.Text = report.Scale.SerialNo;
+                    mainwindow.txtTagName.Text = report.Scale.TagName;
+                    mainwindow.txtCapacity.Text = report.Scale.Capacity.ToString();
+                    mainwindow.txtResolutionD.Text = report.Scale.ResolutionD.ToString();
+                    mainwindow.txtResolutionE.Text = report.Scale.ResolutionE.ToString();
+                    mainwindow.cbUnit.Text = report.Scale.Unit.ToString();
+                    mainwindow.cbScaleClass.Text = report.Scale.ScaleClass.ToString();
+
+                    mainwindow.txtPlace.Text = report.Place;
+                    mainwindow.cbTechnician.Text = report.Technician;
+                    mainwindow.cbManager.Text = report.Manager;
+                    mainwindow.cbStatusReport.Text = report.Status.ToString();
+
+                    mainwindow.txtRepMassApply.Text = report.RepTest.RepMass.ToString();
+                    mainwindow.txtRepRead1.Text = report.RepTest.RepRead1.ToString();
+                    mainwindow.txtRepRead2.Text = report.RepTest.RepRead2.ToString();
+
+                    mainwindow.txtMobReadBefore.Text = report.MobTest.MobBefore.ToString();
+                    mainwindow.txtMobOverLoad.Text = report.MobTest.MobLoad.ToString();
+                    mainwindow.txtMobReadAfter.Text = report.MobTest.MobAfter.ToString();
+
+                    mainwindow.cbEccTestType.Text = report.EccTest.Type.ToString();
+                    mainwindow.txtEccLoad.Text = report.EccTest.EccLoad.ToString();
+                    mainwindow.txtEccReadA.Text = report.EccTest.A.ToString();
+                    mainwindow.txtEccReadB.Text = report.EccTest.B.ToString();
+                    mainwindow.txtEccReadC.Text = report.EccTest.C.ToString();
+                    mainwindow.txtEccReadD.Text = report.EccTest.D.ToString();
+                    mainwindow.txtEccReadE.Text = report.EccTest.E.ToString();
+                    mainwindow.txtEccReadF.Text = report.EccTest.F.ToString();
 
 
+                }
+            }
+        }
+
+    }
 }
