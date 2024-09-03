@@ -21,6 +21,9 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Calibration>().OwnsOne(_ => _.MobTest);
         modelBuilder.Entity<Calibration>().OwnsOne(_ => _.EccTest);
         modelBuilder.Entity<Calibration>().OwnsMany(_ => _.WeightTest);
+        modelBuilder.Entity<Calibration>().HasIndex(_ => _.ReportId).IsUnique();
+
+        modelBuilder.Entity<Customer>().HasIndex(_ => _.Name).IsUnique();
 
     }
 

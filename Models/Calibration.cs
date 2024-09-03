@@ -10,7 +10,7 @@ namespace ReportApp.Models
 
         public Customer Customer { get; set; }
         public Scale Scale { get; set; }
-
+        [Required]
         public string ReportId { get; set; }
         public string Place { get; set; }
         [DataType(DataType.Date)]
