@@ -304,13 +304,21 @@ public partial class MainWindow : Window
         {
             try
             {
-                var customer = new Customer
+                Customer customer = new Customer();
+                if (context.Customers.Any(c => c.Name == mainWindow.txtCustomerName.Text))
                 {
-                    Name = mainWindow.txtCustomerName.Text,
-                    Address = mainWindow.txtAddress.Text,
-                    City = mainWindow.txtCity.Text,
-                    State = mainWindow.cbState.Text
-                };
+                    customer = context.Customers.FirstOrDefault(c => c.Name == mainWindow.txtCustomerName.Text);
+                }
+                else
+                {
+                    customer = new Customer
+                    {
+                        Name = mainWindow.txtCustomerName.Text,
+                        Address = mainWindow.txtAddress.Text,
+                        City = mainWindow.txtCity.Text,
+                        State = mainWindow.cbState.Text
+                    };
+                }
 
                 var scale = new Scale
                 {
