@@ -2,11 +2,13 @@
 using ReportApp.Data;
 using ReportApp.Models;
 using ReportApp.Models.Enums;
+using ReportApp.Models.Extensions;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+
 
 namespace ReportApp.Views;
 
@@ -333,7 +335,7 @@ public partial class MainWindow : Window
                     ResolutionE = double.Parse(mainWindow.txtResolutionE.Text),
                     Capacity = double.Parse(mainWindow.txtCapacity.Text),
                     Model = mainWindow.txtModel.Text,
-                    Unit = Enum.TryParse<Unit>(mainWindow.cbUnit.Text, out var u) ? u : Unit.Kg, 
+                    Unit = Enum.TryParse<Unit>(mainWindow.cbUnit.Text, out var u) ? u : Unit.Kg,
                     ScaleClass = Enum.TryParse<ScaleClass>(mainWindow.cbScaleClass.Text, out var cl) ? cl : ScaleClass.ClassIII,
                 };
 
@@ -355,17 +357,33 @@ public partial class MainWindow : Window
                 {
                     Type = mainWindow.cbEccTestType.Text,
                     EccLoad = double.TryParse(mainWindow.txtEccLoad?.Text, out var eccLoad) ? eccLoad : (double?)null,
-                    A = double.TryParse(mainWindow.txtEccReadA?.Text, out var a) ? a : (double?)null,
-                    B = double.TryParse(mainWindow.txtEccReadB?.Text, out var b) ? b : (double?)null,
-                    C = double.TryParse(mainWindow.txtEccReadC?.Text, out var c) ? c : (double?)null,
-                    D = double.TryParse(mainWindow.txtEccReadD?.Text, out var d) ? d : (double?)null,
-                    E = double.TryParse(mainWindow.txtEccReadE?.Text, out var e) ? e : (double?)null,
-                    F = double.TryParse(mainWindow.txtEccReadF?.Text, out var f) ? f : (double?)null,
+                    A = double.TryParse(mainWindow.txtEccReadA?.Text, out var a) ? a : null,
+                    B = double.TryParse(mainWindow.txtEccReadB?.Text, out var b) ? b : null,
+                    C = double.TryParse(mainWindow.txtEccReadC?.Text, out var c) ? c : null,
+                    D = double.TryParse(mainWindow.txtEccReadD?.Text, out var d) ? d : null,
+                    E = double.TryParse(mainWindow.txtEccReadE?.Text, out var e) ? e : null,
+                    F = double.TryParse(mainWindow.txtEccReadF?.Text, out var f) ? f : null,
                 };
 
                 var weightTestList = new List<WeightTest>();
-                var weightsId = mainWindow.weightsList.Select(w => w.WeightId).ToList();            
+                for (int i = 1; i <= 12; i++)
+                {
+                    var wLoad = mainWindow.FindName($"txtLoad{i}") as TextBox;
+                    var wRead = mainWindow.FindName($"txtRead{i}") as TextBox;
+                    if (!string.IsNullOrEmpty(wLoad.Text))
+                    {
+                        weightTestList.Add(
+                            new WeightTest
+                            {
+                                WLoad = double.TryParse(wLoad.Text, out var wl) ? wl : 0,
+                                WRead = double.TryParse(wRead.Text, out var wr) ? wr : 0
+                            });
 
+                    }
+
+                }
+
+                var weightsId = mainWindow.weightsList.Select(w => w.WeightId).ToList();
 
                 var cal = new Calibration
                 {
@@ -381,7 +399,7 @@ public partial class MainWindow : Window
                     DateReport = DateTime.Now,
                     Weights = context.Weights.Where(w => weightsId.Contains(w.WeightId)).ToList(),
                     WeightTest = weightTestList,
-                    Status = Enum.TryParse<ReportStatus>(mainWindow.cbStatusReport.Text, out var status) ? status: ReportStatus.Aprovado,
+                    Status = Enum.TryParse<ReportStatus>(mainWindow.cbStatusReport.Text, out var status) ? status : ReportStatus.Aprovado,
                     Scale = scale
 
 
@@ -413,8 +431,28 @@ public partial class MainWindow : Window
         }
     }
 
+    private void AddWeighTests(List<WeightTest> weightTests)
+    {
+        for (int i = 1; i <= weightTests.Count; i++)
+        {
+            var load = this.FindName($"txtLoad{i}") as TextBox;
+            var read = this.FindName($"txtRead{i}") as TextBox;
+            var testLoad = weightTests[i - 1].WLoad.ToString();
+            var testRead = weightTests[i - 1].WRead.ToString();
+
+            if (!string.IsNullOrEmpty(testLoad) && !string.IsNullOrEmpty(testRead))
+            {
+                load.Text = testLoad;
+                read.Text = testRead;
+
+            }
+        }
+
+    }
     private void LoadReport(MainWindow mainwindow)
     {
+        ClearAllInputs(spWeightTest);
+        ClearAllInputs(spEccTest);
         if (string.IsNullOrEmpty(mainwindow.txtReportId.Text))
         {
             return;
@@ -448,8 +486,8 @@ public partial class MainWindow : Window
                     mainwindow.txtCapacity.Text = report.Scale.Capacity.ToString();
                     mainwindow.txtResolutionD.Text = report.Scale.ResolutionD.ToString();
                     mainwindow.txtResolutionE.Text = report.Scale.ResolutionE.ToString();
-                    mainwindow.cbUnit.Text = report.Scale.Unit.ToString();
-                    mainwindow.cbScaleClass.Text = report.Scale.ScaleClass.ToString();
+                    mainwindow.cbUnit.Text = report.Scale.Unit.UnitToString();
+                    mainwindow.cbScaleClass.Text = report.Scale.ScaleClass.ScaleClassToString();
 
                     mainwindow.txtPlace.Text = report.Place;
                     mainwindow.cbTechnician.Text = report.Technician;
@@ -472,8 +510,10 @@ public partial class MainWindow : Window
                     mainwindow.txtEccReadD.Text = report.EccTest.D.ToString();
                     mainwindow.txtEccReadE.Text = report.EccTest.E.ToString();
                     mainwindow.txtEccReadF.Text = report.EccTest.F.ToString();
+
                     mainwindow.AddWeight(report.Weights);
 
+                    mainwindow.AddWeighTests(report.WeightTest);
 
                 }
             }

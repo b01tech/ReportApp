@@ -1,10 +1,9 @@
-﻿namespace ReportApp.Models.Enums
+﻿namespace ReportApp.Models.Enums;
+
+public enum ScaleClass
 {
-    public enum ScaleClass
-    {
-        ClassI,
-        ClassII,
-        ClassIII,
-        ClassIV
-    }
-}
+    ClassI,
+    ClassII,
+    ClassIII,
+    ClassIV            
+} 
