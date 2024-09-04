@@ -56,6 +56,7 @@ public partial class MainWindow : Window
 };
     private SortedSet<string> _ecctypes = new SortedSet<string> { "Não se aplica", "Industrial", "Rodoviária" };
     private static readonly Regex _regex = new Regex("[^0-9,.]+");
+    internal List<Weight> weightsList = new List<Weight>();
 
 
     public MainWindow()
@@ -84,8 +85,9 @@ public partial class MainWindow : Window
         weightWindow.ShowDialog();
     }
 
-    public void AddWeight(List<string> weights)
+    public void AddWeight(List<Weight> weightList)
     {
+        var weights = weightList.Select(w => w.TagName);
         spWeightsList.Children.Clear();
         foreach (var weight in weights)
         {
@@ -95,6 +97,8 @@ public partial class MainWindow : Window
             };
             spWeightsList.Children.Add(label);
         }
+
+        this.weightsList = weightList;
     }
 
     public void LoadUsers()
@@ -359,8 +363,9 @@ public partial class MainWindow : Window
                     F = double.TryParse(mainWindow.txtEccReadF?.Text, out var f) ? f : (double?)null,
                 };
 
-                var weightTestList = new List<WeightTest>();                
-                var weights = new List<Weight>();
+                var weightTestList = new List<WeightTest>();
+                var weightsId = mainWindow.weightsList.Select(w => w.WeightId).ToList();            
+
 
                 var cal = new Calibration
                 {
@@ -374,7 +379,7 @@ public partial class MainWindow : Window
                     EccTest = eccTest,
                     DateCal = DateTime.Now,
                     DateReport = DateTime.Now,
-                    Weights = weights,
+                    Weights = context.Weights.Where(w => weightsId.Contains(w.WeightId)).ToList(),
                     WeightTest = weightTestList,
                     Status = Enum.TryParse<ReportStatus>(mainWindow.cbStatusReport.Text, out var status) ? status: ReportStatus.Aprovado,
                     Scale = scale
@@ -467,6 +472,7 @@ public partial class MainWindow : Window
                     mainwindow.txtEccReadD.Text = report.EccTest.D.ToString();
                     mainwindow.txtEccReadE.Text = report.EccTest.E.ToString();
                     mainwindow.txtEccReadF.Text = report.EccTest.F.ToString();
+                    mainwindow.AddWeight(report.Weights);
 
 
                 }

@@ -46,13 +46,13 @@ public partial class SelectWeightWindow : Window
 
     private void btnAddWeights_Click(object sender, RoutedEventArgs e)
     {
-        var selectedWeights = spWeightsList.Children
+        var selectWeightList = spWeightsList.Children
             .OfType<CheckBox>()
             .Where(cb => cb.IsChecked == true)
-            .Select(c => c.Content.ToString()).ToList();
+            .Select(c => c.Tag as Weight).ToList();
     
 
-        _mainWindow.AddWeight(selectedWeights);
+        _mainWindow.AddWeight(selectWeightList);
         this.Close();
     }
 }
