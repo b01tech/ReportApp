@@ -350,13 +350,13 @@ public partial class MainWindow : Window
                 var eccTest = new EccTest
                 {
                     Type = mainWindow.cbEccTestType.Text,
-                    EccLoad = TryParseDouble(mainWindow.txtEccLoad?.Text),
-                    A = TryParseDouble(mainWindow.txtEccReadA?.Text),
-                    B = TryParseDouble(mainWindow.txtEccReadB?.Text),
-                    C = TryParseDouble(mainWindow.txtEccReadC?.Text),
-                    D = TryParseDouble(mainWindow.txtEccReadD?.Text),
-                    E = TryParseDouble(mainWindow.txtEccReadE?.Text),
-                    F = TryParseDouble(mainWindow.txtEccReadF?.Text),
+                    EccLoad = double.TryParse(mainWindow.txtEccLoad?.Text, out var eccLoad) ? eccLoad : (double?)null,
+                    A = double.TryParse(mainWindow.txtEccReadA?.Text, out var a) ? a : (double?)null,
+                    B = double.TryParse(mainWindow.txtEccReadB?.Text, out var b) ? b : (double?)null,
+                    C = double.TryParse(mainWindow.txtEccReadC?.Text, out var c) ? c : (double?)null,
+                    D = double.TryParse(mainWindow.txtEccReadD?.Text, out var d) ? d : (double?)null,
+                    E = double.TryParse(mainWindow.txtEccReadE?.Text, out var e) ? e : (double?)null,
+                    F = double.TryParse(mainWindow.txtEccReadF?.Text, out var f) ? f : (double?)null,
                 };
 
                 var weightTestList = new List<WeightTest>();                
@@ -385,7 +385,7 @@ public partial class MainWindow : Window
                 context.SaveChanges();
                 MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show($"Erro ao salvar o relatório: Campos inválidos", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
             }
