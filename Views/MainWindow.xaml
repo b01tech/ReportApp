@@ -101,7 +101,7 @@
             </StackPanel>
 
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,48,16,60">
+        <StackPanel x:Name="spCalInfo" Orientation="Vertical" Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="4" Background="{StaticResource SecondaryBrush}" Margin="16,48,16,60">
             <Label Content="Dados da Calibração" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="LOCAL:"/>

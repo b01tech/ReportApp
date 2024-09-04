@@ -239,6 +239,7 @@ public partial class MainWindow : Window
         ClearAllInputs(spRepTest);
         ClearAllInputs(spEccTest);
         ClearAllInputs(spScaleInfo);
+        ClearAllInputs(spCalInfo);
     }
     private void ClearAllInputs(Panel panel)
     {
@@ -395,8 +396,8 @@ public partial class MainWindow : Window
                     RepTest = repTest,
                     MobTest = mobTest,
                     EccTest = eccTest,
-                    DateCal = DateTime.Now,
-                    DateReport = DateTime.Now,
+                    DateCal = DateTime.Parse(mainWindow.dateCal.Text),
+                    DateReport = DateTime.Parse(mainWindow.dateReport.Text),
                     Weights = context.Weights.Where(w => weightsId.Contains(w.WeightId)).ToList(),
                     WeightTest = weightTestList,
                     Status = Enum.TryParse<ReportStatus>(mainWindow.cbStatusReport.Text, out var status) ? status : ReportStatus.Aprovado,
@@ -404,9 +405,29 @@ public partial class MainWindow : Window
 
 
                 };
-                context.Calibrations.Add(cal);
-                context.SaveChanges();
-                MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.");
+                if (context.Calibrations.Any(id => id.ReportId == mainWindow.txtReportId.Text))
+                {
+                    var result = MessageBox.Show($"O certificado {mainWindow.txtReportId.Text} já existe.\nDeseja substitui-lo?", "Aviso", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        UpdateReport(cal, context);
+                        MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.");
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Certificado não foi salvo.");
+                        return;
+                    }
+                }
+                else
+                {
+                    context.Calibrations.Add(cal);
+                    context.SaveChanges();
+                    MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.");
+
+                }
+
+
             }
             catch (Exception)
             {
@@ -437,13 +458,16 @@ public partial class MainWindow : Window
         {
             var load = this.FindName($"txtLoad{i}") as TextBox;
             var read = this.FindName($"txtRead{i}") as TextBox;
+            var error = this.FindName($"txtError{i}") as TextBox;
             var testLoad = weightTests[i - 1].WLoad.ToString();
             var testRead = weightTests[i - 1].WRead.ToString();
+            var testError = weightTests[i - 1].WLoad - weightTests[i - 1].WRead;
 
             if (!string.IsNullOrEmpty(testLoad) && !string.IsNullOrEmpty(testRead))
             {
                 load.Text = testLoad;
                 read.Text = testRead;
+                error.Text = testError.ToString("F4");
 
             }
         }
@@ -470,11 +494,12 @@ public partial class MainWindow : Window
 
                 if (report is null)
                 {
+                    MessageBox.Show($"Certificado {mainwindow.txtReportId.Text} não localizado", "Erro", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
                 else
                 {
-                    MessageBox.Show($"Informações do certificado {mainwindow.txtReportId.Text} carregadas");
+                    MessageBox.Show($"Informações do certificado {mainwindow.txtReportId.Text} carregadas", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
                     mainwindow.txtCustomerName.Text = report.Customer.Name;
                     mainwindow.txtAddress.Text = report.Customer.Address;
                     mainwindow.txtCity.Text = report.Customer.City;
@@ -493,6 +518,8 @@ public partial class MainWindow : Window
                     mainwindow.cbTechnician.Text = report.Technician;
                     mainwindow.cbManager.Text = report.Manager;
                     mainwindow.cbStatusReport.Text = report.Status.ToString();
+                    mainwindow.dateCal.Text = report.DateCal.ToString();
+                    mainwindow.dateReport.Text = report.DateReport.ToString();
 
                     mainwindow.txtRepMassApply.Text = report.RepTest.RepMass.ToString();
                     mainwindow.txtRepRead1.Text = report.RepTest.RepRead1.ToString();
@@ -519,5 +546,33 @@ public partial class MainWindow : Window
             }
         }
 
+    }
+
+    private void UpdateReport(Calibration cal, AppDbContext context)
+    {
+
+        var report = context.Calibrations.FirstOrDefault(c => c.ReportId == cal.ReportId);
+
+        if (report != null)
+        {
+
+            report.Place = cal.Place;
+            report.Technician = cal.Technician;
+            report.Manager = cal.Manager;
+            report.Customer = cal.Customer;
+            report.RepTest = cal.RepTest;
+            report.MobTest = cal.MobTest;
+            report.EccTest = cal.EccTest;
+            report.DateCal = cal.DateCal;
+            report.DateReport = cal.DateReport;
+            report.Weights = cal.Weights;
+            report.WeightTest = cal.WeightTest;
+            report.Status = cal.Status;
+            report.Scale = cal.Scale;
+
+
+            context.Calibrations.Update(report);
+            context.SaveChanges();
+        }
     }
 }
