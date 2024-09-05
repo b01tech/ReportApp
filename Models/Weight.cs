@@ -8,4 +8,6 @@ public class Weight
     public int WeightId { get; set; }
     public string TagName { get; set; }
     public double NominalValue { get; set; }
+
+    public List<Calibration> Calibrations { get; set; } = new List<Calibration>();
 }

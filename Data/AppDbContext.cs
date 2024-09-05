@@ -21,6 +21,9 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Calibration>().OwnsOne(_ => _.EccTest);
         modelBuilder.Entity<Calibration>().OwnsMany(_ => _.WeightTest);
         modelBuilder.Entity<Calibration>().HasIndex(_ => _.ReportId).IsUnique();
+        modelBuilder.Entity<Calibration>()
+            .HasMany(c => c.Weights)
+            .WithMany(w => w.Calibrations);
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
