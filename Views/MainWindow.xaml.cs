@@ -22,7 +22,7 @@ public partial class MainWindow : Window
     {
         "Roni Cleber"
     };
-    private List<string> _status = new List<string> { "Aprovado", "Reprovado" };
+    private List<string> _status = ReportStatus.;
     private List<string> _scaleClass = new List<string>
     { "Não se aplica","Classe I", "Classe II", "Classe III", "Classe IV" };
     private List<string> _unit = new List<string> { "mg", "g", "kg" };

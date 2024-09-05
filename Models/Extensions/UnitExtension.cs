@@ -18,5 +18,12 @@ public static class UnitExtension
                 return "";
         }
     }
+    public static List<string> GetAllUnit()
+    {
+        return Enum.GetValues(typeof(Unit))
+            .Cast<Unit>()
+            .Select(u => u.UnitToString())
+            .ToList();
+    } 
 
 }

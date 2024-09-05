@@ -18,8 +18,17 @@ public static class ScaleClassExtension
                 return "Classe III";
             case ScaleClass.ClassIV:
                 return "Classe IV";
+            case ScaleClass.NA:
+                return "Não se aplica";
             default:
                 return "Não se aplica";
         }
+    }
+    public static List<string> GetAllScaleClass()
+    {
+        return Enum.GetValues(typeof(ScaleClass))
+                   .Cast<ScaleClass>()
+                   .Select(sc => sc.ScaleClassToString())
+                   .ToList();
     }
 }

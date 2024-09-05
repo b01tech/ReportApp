@@ -5,5 +5,6 @@ public enum ScaleClass
     ClassI,
     ClassII,
     ClassIII,
-    ClassIV            
+    ClassIV,
+    NA
 } 
