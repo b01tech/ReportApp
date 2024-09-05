@@ -63,7 +63,7 @@ namespace ReportApp.Migrations
 
                     b.HasIndex("ScaleId");
 
-                    b.ToTable("Calibrations");
+                    b.ToTable("Calibrations", (string)null);
                 });
 
             modelBuilder.Entity("ReportApp.Models.Customer", b =>
@@ -90,7 +90,7 @@ namespace ReportApp.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("ReportApp.Models.Scale", b =>
@@ -128,7 +128,7 @@ namespace ReportApp.Migrations
 
                     b.HasKey("ScaleId");
 
-                    b.ToTable("Scales");
+                    b.ToTable("Scales", (string)null);
                 });
 
             modelBuilder.Entity("ReportApp.Models.Weight", b =>
@@ -151,7 +151,7 @@ namespace ReportApp.Migrations
 
                     b.HasIndex("CalibrationId");
 
-                    b.ToTable("Weights");
+                    b.ToTable("Weights", (string)null);
                 });
 
             modelBuilder.Entity("ReportApp.Models.Calibration", b =>
@@ -168,7 +168,7 @@ namespace ReportApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsOne("ReportApp.Models.EccTest", "EccTest", b1 =>
+                    b.OwnsOne("ReportApp.Models.Calibration.EccTest#ReportApp.Models.EccTest", "EccTest", b1 =>
                         {
                             b1.Property<int>("CalibrationId")
                                 .HasColumnType("INTEGER");
@@ -200,13 +200,13 @@ namespace ReportApp.Migrations
 
                             b1.HasKey("CalibrationId");
 
-                            b1.ToTable("Calibrations");
+                            b1.ToTable("Calibrations", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CalibrationId");
                         });
 
-                    b.OwnsOne("ReportApp.Models.MobTest", "MobTest", b1 =>
+                    b.OwnsOne("ReportApp.Models.Calibration.MobTest#ReportApp.Models.MobTest", "MobTest", b1 =>
                         {
                             b1.Property<int>("CalibrationId")
                                 .HasColumnType("INTEGER");
@@ -222,13 +222,13 @@ namespace ReportApp.Migrations
 
                             b1.HasKey("CalibrationId");
 
-                            b1.ToTable("Calibrations");
+                            b1.ToTable("Calibrations", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CalibrationId");
                         });
 
-                    b.OwnsOne("ReportApp.Models.RepTest", "RepTest", b1 =>
+                    b.OwnsOne("ReportApp.Models.Calibration.RepTest#ReportApp.Models.RepTest", "RepTest", b1 =>
                         {
                             b1.Property<int>("CalibrationId")
                                 .HasColumnType("INTEGER");
@@ -244,13 +244,13 @@ namespace ReportApp.Migrations
 
                             b1.HasKey("CalibrationId");
 
-                            b1.ToTable("Calibrations");
+                            b1.ToTable("Calibrations", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("CalibrationId");
                         });
 
-                    b.OwnsMany("ReportApp.Models.WeightTest", "WeightTest", b1 =>
+                    b.OwnsMany("ReportApp.Models.Calibration.WeightTest#ReportApp.Models.WeightTest", "WeightTest", b1 =>
                         {
                             b1.Property<int>("Id")
                                 .ValueGeneratedOnAdd()
@@ -269,7 +269,7 @@ namespace ReportApp.Migrations
 
                             b1.HasIndex("CalibrationId");
 
-                            b1.ToTable("WeightTest");
+                            b1.ToTable("WeightTest", (string)null);
 
                             b1.WithOwner("Calibration")
                                 .HasForeignKey("CalibrationId");

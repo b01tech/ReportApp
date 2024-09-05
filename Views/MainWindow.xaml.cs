@@ -3,6 +3,7 @@ using ReportApp.Data;
 using ReportApp.Models;
 using ReportApp.Models.Enums;
 using ReportApp.Models.Extensions;
+using ReportApp.Services;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -14,18 +15,11 @@ namespace ReportApp.Views;
 
 public partial class MainWindow : Window
 {
-    private SortedSet<string> _users = new SortedSet<string>
-    {
-        "Bruno Marçau", "Roni Cleber", "Marcelo Moreira", "Dimas dos Reis", "Paulo", "Israel Peres","Welington"
-    };
-    private SortedSet<string> _managers = new SortedSet<string>
-    {
-        "Roni Cleber"
-    };
-    private List<string> _status = ReportStatus.;
-    private List<string> _scaleClass = new List<string>
-    { "Não se aplica","Classe I", "Classe II", "Classe III", "Classe IV" };
-    private List<string> _unit = new List<string> { "mg", "g", "kg" };
+    private SortedSet<string> _users = User.GetUsers();
+    private SortedSet<string> _managers = User.GetManagers();
+    private List<string> _status = ReportStatusExtension.GetAllStatus();
+    private List<string> _scaleClass = ScaleClassExtension.GetAllScaleClass();
+    private List<string> _unit = UnitExtension.GetAllUnit();
     private SortedSet<string> _states = new SortedSet<string>
 {
     "AC", // Acre
@@ -58,7 +52,8 @@ public partial class MainWindow : Window
 };
     private SortedSet<string> _ecctypes = new SortedSet<string> { "Não se aplica", "Industrial", "Rodoviária" };
     private static readonly Regex _regex = new Regex("[^0-9,.]+");
-    internal List<Weight> weightsList = new List<Weight>();
+    internal List<Weight> weightsList = new();
+    private PdfCreatorService _pdfCreatorService = new();
 
 
     public MainWindow()
@@ -411,11 +406,12 @@ public partial class MainWindow : Window
                     if (result == MessageBoxResult.Yes)
                     {
                         UpdateReport(cal, context);
-                        MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.");
+                        MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.","Aviso",MessageBoxButton.OK);
+                        _pdfCreatorService.Create(cal);
                     }
                     else
                     {
-                        MessageBox.Show($"Certificado não foi salvo.");
+                        MessageBox.Show($"Certificado não foi salvo.","Aviso", MessageBoxButton.OK);
                         return;
                     }
                 }
@@ -424,7 +420,7 @@ public partial class MainWindow : Window
                     context.Calibrations.Add(cal);
                     context.SaveChanges();
                     MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.");
-
+                    _pdfCreatorService.Create(cal);
                 }
 
 
