@@ -51,9 +51,9 @@ public partial class MainWindow : Window
     "TO"  // Tocantins
 };
     private SortedSet<string> _ecctypes = new SortedSet<string> { "Não se aplica", "Industrial", "Rodoviária" };
-    private static readonly Regex _regex = new Regex("[^0-9,.]+");
+    private static readonly Regex _regex = new Regex("[^0-9,]+");
     internal List<Weight> weightsList = new();
-    private PdfCreatorService _pdfCreatorService = new();
+    private PdfCreatorService _pdfCreatorService = new();    
 
 
     public MainWindow()
@@ -280,7 +280,7 @@ public partial class MainWindow : Window
                 if (double.TryParse(weightLoad.Text, out double loadValue) && double.TryParse(weightRead.Text, out double readValue))
                 {
                     double error = loadValue - readValue;
-                    weightError.Text = error.ToString("F4");
+                    weightError.Text = error.ToString($"F{CalcFloatPoint(txtResolutionD.Text)}");
                 }
                 else
                 {
@@ -434,10 +434,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private double? TryParseDouble(string text)
-    {
-        return double.TryParse(text, out double value) ? value : (double?)null;
-    }
+
 
     private void btnSearchId_Click(object sender, RoutedEventArgs e)
     {
@@ -448,7 +445,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void AddWeighTests(List<WeightTest> weightTests)
+    private void AddWeighTests(List<WeightTest> weightTests, string res)
     {
         for (int i = 1; i <= weightTests.Count; i++)
         {
@@ -463,7 +460,7 @@ public partial class MainWindow : Window
             {
                 load.Text = testLoad;
                 read.Text = testRead;
-                error.Text = testError.ToString("F4");
+                error.Text = testError.ToString($"F{CalcFloatPoint(res)}");
 
             }
         }
@@ -536,7 +533,7 @@ public partial class MainWindow : Window
 
                     mainwindow.AddWeight(report.Weights);
 
-                    mainwindow.AddWeighTests(report.WeightTest);
+                    mainwindow.AddWeighTests(report.WeightTest, mainwindow.txtResolutionD.Text);
 
                 }
             }
@@ -547,7 +544,9 @@ public partial class MainWindow : Window
     private void UpdateReport(Calibration cal, AppDbContext context)
     {
 
-        var report = context.Calibrations.FirstOrDefault(c => c.ReportId == cal.ReportId);
+        var report = context.Calibrations
+            .Include(c => c.Weights)
+            .FirstOrDefault(c => c.ReportId == cal.ReportId);
 
         if (report != null)
         {
@@ -561,14 +560,26 @@ public partial class MainWindow : Window
             report.EccTest = cal.EccTest;
             report.DateCal = cal.DateCal;
             report.DateReport = cal.DateReport;
-            report.Weights = cal.Weights;
-            report.WeightTest = cal.WeightTest;
             report.Status = cal.Status;
             report.Scale = cal.Scale;
+            report.Weights.Clear();            
+            report.Weights = cal.Weights;
+            report.WeightTest = cal.WeightTest;
+
 
 
             context.Calibrations.Update(report);
             context.SaveChanges();
         }
+    }
+
+    private int CalcFloatPoint(string res)
+    {
+        res = res.Replace(",", ".");
+        int floatPoint = res.Length - res.IndexOf(".") - 1;
+        if (floatPoint == -1)
+            return 0;
+
+        return floatPoint;
     }
 }

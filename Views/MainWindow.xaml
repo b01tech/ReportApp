@@ -124,7 +124,7 @@
                 <ComboBox x:Name="cbManager" Width="250"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Label Content="SITUAÇÂO DO INSTRUMENTO:"/>
+                <Label Content="SITUAÇÃO DO INSTRUMENTO:"/>
                 <ComboBox x:Name="cbStatusReport"/>
             </StackPanel>
         </StackPanel>
