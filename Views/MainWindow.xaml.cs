@@ -546,6 +546,7 @@ public partial class MainWindow : Window
 
         var report = context.Calibrations
             .Include(c => c.Weights)
+            .Include(c => c.Scale)
             .FirstOrDefault(c => c.ReportId == cal.ReportId);
 
         if (report != null)

@@ -2,6 +2,7 @@
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using iText.Kernel.Colors;
 using ReportApp.Models;
 using ReportApp.Models.Extensions;
 using System.IO;
@@ -30,78 +31,124 @@ public class PdfCreatorService
         PdfDocument pdf = new PdfDocument(writer);
         Document doc = new Document(pdf, iText.Kernel.Geom.PageSize.A4);
 
-        var t1 = new Table(32);
+        var t1 = new Table(6);
         t1.SetWidth(520);
-        t1.SetFontSize(10).SetTextAlignment(TextAlignment.CENTER).SetBold();
+        t1.SetFontSize(8).SetTextAlignment(TextAlignment.CENTER).SetBold();
 
-        t1.AddCell(new Cell(1, 20).Add(new Paragraph("Especialista em Pesagem Industrial")).SetFontSize(10).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 32).Add(new Paragraph($"CERTIFICADO DE CALIBRAÇÃO    N°   {cal.ReportId}")).SetFontSize(15)).SetVerticalAlignment(VerticalAlignment.MIDDLE);
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph("Cliente:")));
-        t1.AddCell(new Cell(1, 20).Add(new Paragraph($"{cal.Customer.Name}")));
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph("Endereço:")));
-        t1.AddCell(new Cell(1, 20).Add(new Paragraph($"{cal.Customer.Address}")));
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph("Cidade:")));
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph($"{cal.Customer.City}")));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("Estado:")));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph($"{cal.Customer.State}")));
-        t1.AddCell(new Cell(1, 32).Add(new Paragraph("")));
+        t1.AddCell(new Cell(3, 3).Add(new Paragraph("IMAGEM:")));
+        t1.AddCell(new Cell(1, 3).Add(new Paragraph($"CERTIFICADO")).SetBackgroundColor(ColorConstants.DARK_GRAY).SetFontColor(ColorConstants.WHITE));
+        t1.AddCell(new Cell(2, 3).Add(new Paragraph($"{cal.ReportId}").SetFontSize(12)));
 
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph("Fabricante:")));
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph($"{cal.Scale.Model}")));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("Classe:")));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph($"{cal.Scale.ScaleClass.ScaleClassToString()}")));
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph("Nº de série:")));
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph($"{cal.Scale.SerialNo}")));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("TAG:")));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph($"{cal.Scale.TagName}")));
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph("Capacidade:")));
-        t1.AddCell(new Cell(1, 10).Add(new Paragraph($"{cal.Scale.Capacity}")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Cliente:")));
+        t1.AddCell(new Cell(1, 5).Add(new Paragraph($"{cal.Customer.Name}").SetHorizontalAlignment( HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Endereço:")));
+        t1.AddCell(new Cell(1, 5).Add(new Paragraph($"{cal.Customer.Address}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Cidade:")));
+        t1.AddCell(new Cell(1, 3).Add(new Paragraph($"{cal.Customer.City}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Estado:")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Customer.State}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("")));
+
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Fabricante:")));
+        t1.AddCell(new Cell(1, 5).Add(new Paragraph($"{cal.Scale.Model}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Nº de série:")));
+        t1.AddCell(new Cell(1, 5).Add(new Paragraph($"{cal.Scale.SerialNo}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("TAG:")));
+        t1.AddCell(new Cell(1, 3).Add(new Paragraph($"{cal.Scale.TagName}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Classe:")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Scale.ScaleClass.ScaleClassToString()}")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Capacidade:")));
+        t1.AddCell(new Cell(1, 3).Add(new Paragraph($"{cal.Scale.Capacity}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("UNIDADE:")));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Scale.Unit.ToString()}")));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph($"Resolução:")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"Resolução:")));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"d=")));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Scale.ResolutionD}")));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"e=")));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Scale.ResolutionE}")));
-        t1.AddCell(new Cell(1, 32).Add(new Paragraph("")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("")));
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("")));
 
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("Ensaio de Mobilidade")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph("Leitura sem sobrecarga:")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph("Sobrecarga aplicada")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph("Leitura após a sobrecarga:")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.MobTest.MobBefore}")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.MobTest.MobLoad}")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.MobTest.MobAfter}")));
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("")));
 
-        t1.AddCell(new Cell(1, 16).Add(new Paragraph("Ensaio de Repetibilidade")));
-        t1.AddCell(new Cell(1, 1).Add(new Paragraph("")));
-        t1.AddCell(new Cell(1, 16).Add(new Paragraph("Ensaio de Mobilidade")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph("Peso aplicado:")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph($"{cal.RepTest.RepMass}")));
-        t1.AddCell(new Cell(1, 1).Add(new Paragraph("")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph("Leitura sem sobrecarga:")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph($"{cal.MobTest.MobBefore}")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph("1°:")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph($"{cal.RepTest.RepRead1}")));
-        t1.AddCell(new Cell(1, 1).Add(new Paragraph("")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph("Sobrecarga aplicada")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph($"{cal.MobTest.MobLoad}")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph("2°:")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph($"{cal.RepTest.RepRead2}")));
-        t1.AddCell(new Cell(1, 1).Add(new Paragraph("")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph("Leitura após a sobrecarga:")));
-        t1.AddCell(new Cell(1, 8).Add(new Paragraph($"{cal.MobTest.MobAfter}")));
-        t1.AddCell(new Cell(1, 32).Add(new Paragraph("")));
+        t1.AddCell(new Cell(1, 3).Add(new Paragraph("Ensaio de Repetibilidade")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Peso aplicado:")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.RepTest.RepMass}")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Leitura 1:")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.RepTest.RepRead1}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Leitura 2:")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.RepTest.RepRead2}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Leitura 3:")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.RepTest.RepRead2}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("")));
 
-        t1.AddCell(new Cell(1, 24).Add(new Paragraph("Ensaio de Excentricidade")));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("Carga Aplicada")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph($"{cal.EccTest.EccLoad}{cal.Scale.Unit.UnitToString()}")));
-        t1.AddCell(new Cell(4, 20).Add(new Paragraph("IMAGEM")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 12).Add(new Paragraph("Leituras")).SetVerticalAlignment(VerticalAlignment.MIDDLE).SetUnderline());
-        t1.AddCell(new Cell(1, 3).Add(new Paragraph("1")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("0000kg")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 3).Add(new Paragraph("2")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("0000kg")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 3).Add(new Paragraph("3")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("0000kg")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 3).Add(new Paragraph("4")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("0000kg")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 3).Add(new Paragraph("5")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("0000kg")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 3).Add(new Paragraph("6")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 4).Add(new Paragraph("0000kg")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("Ensaio de Excentricidade")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("TIPO DE ENSAIO:")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.EccTest.Type}")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Peso aplicado")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.EccTest.EccLoad}{cal.Scale.Unit.UnitToString()}")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("A")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.EccTest.A}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(6, 3).Add(new Paragraph("IMAGEM")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("B")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.EccTest.B}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("C")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.EccTest.C}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("D")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.EccTest.D}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("E")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.EccTest.E}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("F")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.EccTest.F}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("")));
+
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("Teste de Pesagem")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("CARGA")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("LEITURA")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("ERRO")));
+        t1.AddCell(new Cell(1, 3).Add(new Paragraph("PADRÕES DE TRABALHO UTILIZADOS")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[0].WLoad}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[0].WRead}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"000000")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(10, 3).Add(new Paragraph("IMAGEM")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        for (int i = 1; i < 10; i++)
+        {
+            if (i < cal.WeightTest.Count)
+            {
+                t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[i].WLoad}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+                t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[i].WRead}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+                t1.AddCell(new Cell(1, 1).Add(new Paragraph($"000000")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+            }
+            else
+            {
+                t1.AddCell(new Cell(1, 1).Add(new Paragraph($"--")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+                t1.AddCell(new Cell(1, 1).Add(new Paragraph($"--")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+                t1.AddCell(new Cell(1, 1).Add(new Paragraph($"--")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+            }
+        }
+
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("EXECUTOR")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.Technician}")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("DATA DO ENSAIO:")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.DateCal.ToString("dd/MM/yyyy")}")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("RESPONSÁVEL:")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.Manager}")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph("TOLERÂNCIA CONFORME::")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("Portaria 157/22")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph("LOCAL:")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.Place}")));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph("Situação do instrumento:")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Status}")));
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("Procedimento de Referência: PR17-DT-CCD_certificado de Conformidade DIGI-TRON").SetFontSize(6)));
+        t1.AddCell(new Cell(1, 6).Add(new Paragraph("Fábrica, Administração, Vendas, Locação e Assistência Técnica. Fone: 41-3377-1577 | E-mail: conformidade@digitronbalancas.com.br").SetFontSize(6)));
+
 
 
         doc.Add(t1);
