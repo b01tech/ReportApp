@@ -7,6 +7,7 @@ using ReportApp.Models;
 using ReportApp.Models.Extensions;
 using System.IO;
 using iText.IO.Image;
+using System.Text;
 
 
 
@@ -16,6 +17,7 @@ public class PdfCreatorService
 {
     private string destFolder = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Pdf"));
     private string imagesPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Resources\Images"));
+    private string weights = string.Empty;
 
     public PdfCreatorService()
     {
@@ -142,7 +144,14 @@ public class PdfCreatorService
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[0].WLoad}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[0].WRead}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"000000")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(10, 3).Add(new Paragraph("IMAGEM")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        StringBuilder sb = new();
+        foreach (Weight w in cal.Weights)
+        {
+            sb.Append($"{w.TagName} ");
+            weights = sb.ToString();
+        }
+
+        t1.AddCell(new Cell(10, 3).Add(new Paragraph($"{weights}")).SetVerticalAlignment(VerticalAlignment.TOP).SetHorizontalAlignment(HorizontalAlignment.LEFT));
         for (int i = 1; i < 10; i++)
         {
             if (i < cal.WeightTest.Count)
