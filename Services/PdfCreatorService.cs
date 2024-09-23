@@ -143,7 +143,7 @@ public class PdfCreatorService
         t1.AddCell(new Cell(1, 3).Add(new Paragraph("PADRÕES DE TRABALHO UTILIZADOS")).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[0].WLoad}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[0].WRead}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"000000")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[0].WError}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
         StringBuilder sb = new();
         foreach (Weight w in cal.Weights)
         {
@@ -158,7 +158,7 @@ public class PdfCreatorService
             {
                 t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[i].WLoad}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
                 t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[i].WRead}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
-                t1.AddCell(new Cell(1, 1).Add(new Paragraph($"000000")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
+                t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.WeightTest[i].WError}")).SetVerticalAlignment(VerticalAlignment.MIDDLE));
             }
             else
             {

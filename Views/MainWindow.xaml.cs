@@ -279,7 +279,7 @@ public partial class MainWindow : Window
             {
                 if (double.TryParse(weightLoad.Text, out double loadValue) && double.TryParse(weightRead.Text, out double readValue))
                 {
-                    double error = loadValue - readValue;
+                    double error = readValue - loadValue;
                     weightError.Text = error.ToString($"F{CalcFloatPoint(txtResolutionD.Text)}");
                 }
                 else

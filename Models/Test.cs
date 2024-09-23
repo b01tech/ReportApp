@@ -37,8 +37,9 @@ namespace ReportApp.Models
         public int CalibrationId { get; set; }
         public double WLoad { get; set; }
         public double WRead { get; set; }
+        public double WError => WRead - WLoad;
 
-        
+
         [ForeignKey("CalibrationId")]
         public Calibration Calibration { get; set; }
     }
