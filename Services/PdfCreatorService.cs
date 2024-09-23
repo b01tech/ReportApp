@@ -70,7 +70,7 @@ public class PdfCreatorService
         t1.AddCell(new Cell(1, 1).Add(new Paragraph("Capacidade:")).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
         t1.AddCell(new Cell(1, 3).Add(new Paragraph($"{cal.Scale.Capacity}").SetTextAlignment(TextAlignment.LEFT)));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph("UNIDADE:")).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
-        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Scale.Unit.ToString()}")));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Scale.Unit.ToString().ToLower()}")));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"Resolução:")).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"d=")).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Scale.ResolutionD}")));
