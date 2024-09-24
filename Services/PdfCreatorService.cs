@@ -47,7 +47,7 @@ public class PdfCreatorService
 
         t1.AddCell(new Cell(3, 3).Add(logoDigiRbc.SetHorizontalAlignment(HorizontalAlignment.CENTER)));
         t1.AddCell(new Cell(1, 3).Add(new Paragraph($"CERTIFICADO")).SetBackgroundColor(ColorConstants.DARK_GRAY).SetFontColor(ColorConstants.WHITE).SetFontSize(12));
-        t1.AddCell(new Cell(2, 3).Add(new Paragraph($"{cal.ReportId}").SetFontSize(12)));
+        t1.AddCell(new Cell(2, 3).Add(new Paragraph($"{cal.ReportId}").SetFontSize(16).SetVerticalAlignment(VerticalAlignment.MIDDLE)));
 
         t1.AddCell(new Cell(1, 1).Add(new Paragraph("Cliente:")).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
         t1.AddCell(new Cell(1, 5).Add(new Paragraph($"{cal.Customer.Name}").SetTextAlignment(TextAlignment.LEFT)));
