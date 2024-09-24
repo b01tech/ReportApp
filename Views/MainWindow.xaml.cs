@@ -347,7 +347,8 @@ public partial class MainWindow : Window
                 {
                     RepMass = double.Parse(mainWindow.txtRepMassApply.Text),
                     RepRead1 = double.Parse(mainWindow.txtRepRead1.Text),
-                    RepRead2 = double.Parse(mainWindow.txtRepRead2.Text)
+                    RepRead2 = double.Parse(mainWindow.txtRepRead2.Text),
+                    RepRead3 = double.Parse(mainWindow.txtRepRead3.Text)
                 };
 
                 var mobTest = new MobTest
@@ -442,8 +443,6 @@ public partial class MainWindow : Window
         }
     }
 
-
-
     private void btnSearchId_Click(object sender, RoutedEventArgs e)
     {
         var mainWindow = Application.Current.Windows.OfType<MainWindow>().FirstOrDefault();
@@ -525,6 +524,7 @@ public partial class MainWindow : Window
                     mainwindow.txtRepMassApply.Text = report.RepTest.RepMass.ToString();
                     mainwindow.txtRepRead1.Text = report.RepTest.RepRead1.ToString();
                     mainwindow.txtRepRead2.Text = report.RepTest.RepRead2.ToString();
+                    mainwindow.txtRepRead3.Text = report.RepTest.RepRead3.ToString();
 
                     mainwindow.txtMobReadBefore.Text = report.MobTest.MobBefore.ToString();
                     mainwindow.txtMobOverLoad.Text = report.MobTest.MobLoad.ToString();

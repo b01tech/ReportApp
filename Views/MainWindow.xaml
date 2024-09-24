@@ -128,7 +128,7 @@
                 <ComboBox x:Name="cbStatusReport"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="spRepTest" Orientation="Vertical" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,36">
+        <StackPanel x:Name="spRepTest" Orientation="Vertical" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,84">
             <Label Content="Repetibilidade" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="PESO APLICADO:"/>
@@ -142,8 +142,12 @@
                 <Label Content="LEITURA 2:"/>
                 <TextBox x:Name="txtRepRead2" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Label Content="LEITURA 3:"/>
+                <TextBox x:Name="txtRepRead3" PreviewTextInput="OnlyNumbers" LostFocus="resetNotValidNumberInput"/>
+            </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="spMobTest" Orientation="Vertical" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,16,16,36">
+        <StackPanel x:Name="spMobTest" Orientation="Vertical" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="2" Background="{StaticResource SecondaryBrush}" Margin="72,36,16,12">
             <Label Content="Mobilidade" FontSize="10"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Label Content="LEITURA SEM SOBRECARGA:"/>

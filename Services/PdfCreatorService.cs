@@ -96,7 +96,7 @@ public class PdfCreatorService
         t1.AddCell(new Cell(1, 1).Add(new Paragraph("Leitura 2:")).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.RepTest.RepRead2}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph("Leitura 3:")).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
-        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.RepTest.RepRead2}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
+        t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.RepTest.RepRead3}").SetHorizontalAlignment(HorizontalAlignment.LEFT)));
         t1.AddCell(new Cell(1, 6).Add(new Paragraph("")));
 
         t1.AddCell(new Cell(1, 6).Add(new Paragraph("Ensaio de Excentricidade")).SetBackgroundColor(ColorConstants.DARK_GRAY).SetFontColor(ColorConstants.WHITE));

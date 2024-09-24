@@ -8,6 +8,7 @@ namespace ReportApp.Models
         public double RepMass { get; set; }
         public double RepRead1 { get; set; }
         public double RepRead2 { get; set; }
+        public double RepRead3 { get; set; }
     }
 
     public class MobTest
