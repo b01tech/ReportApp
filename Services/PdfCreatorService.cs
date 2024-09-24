@@ -147,7 +147,7 @@ public class PdfCreatorService
         StringBuilder sb = new();
         foreach (Weight w in cal.Weights)
         {
-            sb.Append($"{w.TagName} ");
+            sb.Append($"{w.TagName}  ");
             weights = sb.ToString();
         }
 
@@ -178,7 +178,7 @@ public class PdfCreatorService
         t1.AddCell(new Cell(1, 1).Add(new Paragraph("Portaria 157/22")));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph("LOCAL:").SetFontSize(7)).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
         t1.AddCell(new Cell(1, 2).Add(new Paragraph($"{cal.Place}")));
-        t1.AddCell(new Cell(1, 2).Add(new Paragraph("SITUAÇÃO DO INSTRUMENTO:").SetFontSize(7)).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
+        t1.AddCell(new Cell(1, 2).Add(new Paragraph("SITUAÇÃO DO INSTRUMENTO:").SetFontSize(7).SetTextAlignment(TextAlignment.LEFT)).SetBackgroundColor(ColorConstants.LIGHT_GRAY));
         t1.AddCell(new Cell(1, 1).Add(new Paragraph($"{cal.Status}")));
         t1.AddCell(new Cell(1, 6).Add(new Paragraph("Procedimento de Referência: PR17-DT-CCD_certificado de Conformidade DIGI-TRON").SetFontSize(6)));
         t1.AddCell(new Cell(1, 6).Add(new Paragraph("Fábrica, Administração, Vendas, Locação e Assistência Técnica. Fone: 41-3377-1577 | E-mail: conformidade@digitronbalancas.com.br").SetFontSize(6)));

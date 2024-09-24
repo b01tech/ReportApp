@@ -13,7 +13,10 @@ namespace ReportApp
 
             var context = new AppDbContext();
             var seeder = new SeedingDbService(context);
-            seeder.Seed();            
+            seeder.Seed();
+
+            //ExcelImporter ex = new ExcelImporter();
+            //ex.ImportExcelToDb("C:\\Users\\Bruno\\Desktop\\Pasta1.xlsx");
         }
     }
 

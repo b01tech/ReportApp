@@ -31,17 +31,25 @@ public partial class SelectWeightWindow : Window
 
     private void LoadCheckbox()
     {
+        spWeightsList.Children.Clear(); 
 
         foreach (var w in _weights)
         {
-            var checkbox = new CheckBox
-            {
-                Content = $"{w.TagName} - {w.NominalValue} kg",
-                Tag = w
-            };
-            spWeightsList.Children.Add(checkbox);
-        }
+            var checkbox = new CheckBox();
 
+            if (w.NominalValue >= 1)
+            {
+                checkbox.Content = $"{w.TagName} - {w.NominalValue} kg";
+                checkbox.Tag = w;
+            }
+            else
+            {
+                checkbox.Content = $"{w.TagName} - {w.NominalValue * 1000} g";
+                checkbox.Tag = w;
+            }
+
+            spWeightsList.Children.Add(checkbox); 
+        }
     }
 
     private void btnAddWeights_Click(object sender, RoutedEventArgs e)
