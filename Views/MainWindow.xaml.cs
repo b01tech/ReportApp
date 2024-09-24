@@ -311,6 +311,14 @@ public partial class MainWindow : Window
                 if (context.Customers.Any(c => c.Name == mainWindow.txtCustomerName.Text))
                 {
                     customer = context.Customers.FirstOrDefault(c => c.Name == mainWindow.txtCustomerName.Text);
+                    if(customer is not null)
+                    {
+                        customer.Address = mainWindow.txtAddress.Text;
+                        customer.City = mainWindow.txtCity.Text;
+                        customer.State = mainWindow.cbState.Text;
+                        context.Customers.Update(customer);
+                    }
+                                        
                 }
                 else
                 {
