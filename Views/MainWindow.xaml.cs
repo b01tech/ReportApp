@@ -414,8 +414,7 @@ public partial class MainWindow : Window
                     var result = MessageBox.Show($"O certificado {mainWindow.txtReportId.Text} já existe.\nDeseja substitui-lo?", "Aviso", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     if (result == MessageBoxResult.Yes)
                     {
-                        UpdateReport(cal, context);
-                        MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.","Aviso",MessageBoxButton.OK);
+                        UpdateReport(cal, context);                        
                         _pdfCreatorService.Create(cal);
                     }
                     else
@@ -427,8 +426,7 @@ public partial class MainWindow : Window
                 else
                 {
                     context.Calibrations.Add(cal);
-                    context.SaveChanges();
-                    MessageBox.Show($"Certificado {mainWindow.txtReportId.Text} salvo com sucesso.");
+                    context.SaveChanges();                                    
                     _pdfCreatorService.Create(cal);
                 }
 

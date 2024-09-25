@@ -8,6 +8,7 @@ using ReportApp.Models.Extensions;
 using System.IO;
 using iText.IO.Image;
 using System.Text;
+using Microsoft.Win32;
 
 
 
@@ -20,17 +21,34 @@ public class PdfCreatorService
     private string weights = string.Empty;
 
     public PdfCreatorService()
-    {
-        Directory.CreateDirectory(destFolder);
+    {                    
+           Directory.CreateDirectory(destFolder);
     }
 
     public void Create(Calibration cal)
     {
-        string pdfPath = Path.Combine(destFolder, $"{cal.ReportId}.pdf");
-        FileInfo file = new FileInfo(pdfPath);
+        var saveFileDialog = new SaveFileDialog();
+
+        saveFileDialog.Filter = "Arquivo PDF (*.pdf)|*.pdf|Todos os arquivos (*.*)|*.*";
+        saveFileDialog.Title = "Salvar Arquivo PDF";
+        saveFileDialog.DefaultExt = ".pdf";
+        saveFileDialog.AddExtension = true;
+        saveFileDialog.FileName = $"{cal.ReportId}-{cal.Customer.Name}";
+
+        if (saveFileDialog.ShowDialog() == true)
+        {
+            destFolder = saveFileDialog.FileName;
+        }
+        else
+        {
+            return;
+        }
+
+        
+        FileInfo file = new FileInfo(destFolder);
         file.Directory?.Create();
 
-        PdfWriter writer = new PdfWriter(pdfPath);
+        PdfWriter writer = new PdfWriter(destFolder);
         PdfDocument pdf = new PdfDocument(writer);
         Document doc = new Document(pdf, iText.Kernel.Geom.PageSize.A4);
 
@@ -189,7 +207,7 @@ public class PdfCreatorService
 
         doc.Close();
 
-        System.Windows.MessageBox.Show($"Pdf criado com sucesso em {pdfPath}", "Pdf Criado", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+        System.Windows.MessageBox.Show($"Pdf criado com sucesso em:\n {destFolder}", "Pdf Criado", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
 
     }
 }
