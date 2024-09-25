@@ -16,8 +16,8 @@ namespace ReportApp.Services;
 
 public class PdfCreatorService
 {
-    private string destFolder = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Pdf"));
-    private string imagesPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Resources\Images"));
+    private string destFolder = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Pdf"));
+    private string imagesPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Resources\Images"));
     private string weights = string.Empty;
 
     public PdfCreatorService()

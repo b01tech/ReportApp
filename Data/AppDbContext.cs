@@ -6,8 +6,7 @@ namespace ReportApp.Data;
 
 public class AppDbContext : DbContext
 {
-    private string _databasePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\Data\\AppDatabase.db"));
-
+    private string _databasePath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data\\AppDatabase.db"));
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Scale> Scales { get; set; }
     public DbSet<Weight> Weights { get; set; }
@@ -27,8 +26,8 @@ public class AppDbContext : DbContext
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-
+    {    
         optionsBuilder.UseSqlite($"Data Source={_databasePath}");
     }
+  
 }
